@@ -5,8 +5,10 @@ import { useFactory } from "@/context/FactoryContext";
 import { getEmployeesInBuilding } from "@/domain/registry";
 import { WallDisplay } from "./WallDisplay";
 import { WindowView } from "@/components/atmosphere/WindowView";
-import { TenantSkybridges } from "@/components/nexus/TenantSkybridges";
 import { FactoryBlueprint } from "@/components/operations/FactoryBlueprint";
+import { getDepartmentForBuilding } from "@/departments/registry";
+import { DepartmentDashboardPanel } from "@/components/departments/DepartmentDashboardPanel";
+import { TenantSkybridges } from "@/components/nexus/TenantSkybridges";
 
 import type { BuildingId } from "@/domain/types";
 import type { TenantId } from "@/nexus/types";
@@ -39,6 +41,7 @@ const INSTINCT_LABELS: Record<string, string> = {
 export function BuildingInterior() {
   const { currentBuilding, currentShift, timePeriod } = useFactory();
   const employees = getEmployeesInBuilding(currentBuilding.id);
+  const department = getDepartmentForBuilding(currentBuilding.id);
 
   if (currentBuilding.isPlace) return null;
 
@@ -56,9 +59,16 @@ export function BuildingInterior() {
             <div className="mb-1 flex items-center gap-3">
               <span className="text-3xl">{currentBuilding.glyph}</span>
               <div>
-                <p className="text-[10px] font-medium uppercase tracking-[0.3em] text-factory-text-muted">
-                  {currentBuilding.material}
-                </p>
+                {department && (
+                  <p className="text-[10px] font-medium uppercase tracking-[0.3em]" style={{ color: department.accent }}>
+                    {department.name} · {department.entrance}
+                  </p>
+                )}
+                {!department && (
+                  <p className="text-[10px] font-medium uppercase tracking-[0.3em] text-factory-text-muted">
+                    {currentBuilding.material}
+                  </p>
+                )}
                 <h1
                   className="text-2xl font-light tracking-wide"
                   style={{ color: currentBuilding.accent }}
@@ -80,6 +90,10 @@ export function BuildingInterior() {
 
       <div className="grid gap-6 p-8 lg:grid-cols-3">
         <div className="space-y-6 lg:col-span-2">
+          {department && (
+            <DepartmentDashboardPanel departmentId={department.id} />
+          )}
+
           <section>
             <h2 className="mb-3 text-[10px] font-medium uppercase tracking-[0.3em] text-factory-accent">
               One Purpose

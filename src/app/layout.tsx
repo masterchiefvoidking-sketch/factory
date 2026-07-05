@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { FactoryProvider } from "@/context/FactoryContext";
 import { NexusProvider } from "@/context/NexusContext";
 import { OperationsProvider } from "@/context/OperationsContext";
+import { DepartmentsProvider } from "@/context/DepartmentsContext";
 import { CampusShell } from "@/components/campus/CampusShell";
 import "./globals.css";
 
@@ -36,7 +37,9 @@ export default function RootLayout({
         <FactoryProvider>
           <NexusProvider>
             <OperationsProvider>
-              <CampusShell>{children}</CampusShell>
+              <DepartmentsProvider>
+                <CampusShell>{children}</CampusShell>
+              </DepartmentsProvider>
             </OperationsProvider>
           </NexusProvider>
         </FactoryProvider>

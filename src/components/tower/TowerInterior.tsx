@@ -5,6 +5,7 @@ import { useFactory } from "@/context/FactoryContext";
 import { DepartureBoard } from "./DepartureBoard";
 import { CommandCenter } from "@/components/operations/CommandCenter";
 import { Watchboard } from "@/components/operations/Watchboard";
+import { useDepartments } from "@/context/DepartmentsContext";
 import { FOUNDATION_PRINCIPLE } from "@/domain/types";
 
 export function TowerInterior() {
@@ -104,11 +105,36 @@ function MissionControlFloor() {
 }
 
 function WarRoomFloor() {
+  const { executiveFloor, architectRule } = useDepartments();
+
   return (
     <div className="space-y-6">
+      <section className="rounded border border-factory-accent/30 bg-factory-accent/5 p-6">
+        <p className="text-[10px] uppercase tracking-[0.3em] text-factory-accent">
+          {executiveFloor.name}
+        </p>
+        <p className="mt-2 text-sm text-factory-text">{executiveFloor.purpose}</p>
+        <p className="mt-1 text-xs italic text-factory-text-muted">
+          Never: {executiveFloor.neverDoes}
+        </p>
+        <div className="mt-4 space-y-2">
+          {executiveFloor.occupants.map((o, i) => (
+            <div key={i} className="flex gap-4 text-sm">
+              <span className="font-medium text-factory-accent">{o.role}</span>
+              <span className="text-factory-text">{o.title}</span>
+              <span className="text-factory-text-muted">— {o.authority}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+
       <p className="text-sm text-factory-text-muted">
         Whiteboards. Glass. Blueprint tables. Strategy. No coding. Only thinking.
       </p>
+
+      <blockquote className="border-l-2 border-factory-accent pl-4 text-sm italic text-factory-text-muted">
+        &ldquo;{architectRule}&rdquo;
+      </blockquote>
 
       <div className="grid gap-4 md:grid-cols-3">
         {["Strategy", "Architecture", "Roadmap"].map((board) => (

@@ -1,91 +1,71 @@
 # The Factory
 
-**MASTER ARCHITECTURE V1.0** — Titan Campus  
-**PROJECT NEXUS** — FACTORY MASTER PROMPT 002  
-**PROJECT OPERATIONS** — FACTORY MASTER PROMPT 003
+**001** Titan Campus · **002** Project Nexus · **003** Project Operations · **004** Project Departments
 
-> Morgan understands the entire company in under sixty seconds.
+> The Factory feels like walking into a world-class organization — not launching a software suite.
 
 ---
 
-## Three Layers
+## Four Layers
 
-| Layer | Codename | What It Is |
-|-------|----------|------------|
-| **Buildings** | Titan Campus | Spatial headquarters — where you are |
-| **Infrastructure** | Project Nexus | Shared services — how tenants cooperate |
-| **Operations** | Project Operations | Company OS — how work gets coordinated |
+| Layer | What It Is |
+|-------|------------|
+| **Buildings** | Where you are (spatial headquarters) |
+| **Infrastructure** | How tenants cooperate (Nexus shared services) |
+| **Operations** | How work flows (missions, conveyor, mailroom) |
+| **Departments** | Who owns what (organizational structure) |
 
-Tenants are **frozen**. Prime remains Prime. BossLady remains BossLady. The Factory coordinates the work.
+Applications are **workers**. Departments **own responsibility**.
 
-## Project Operations
+---
 
-### The Company Operates 24/7
+## The Organization
 
-Departments report state: Idle · Working · Waiting · Blocked · Review · Maintenance · Offline
+### Executive Floor (Tower · War Room)
+Morgan · Founder · Chief Architect · Final Decision Authority  
+Sets vision. Approves missions. Never performs operational work.
 
-### Daily Rhythm
+### Eight Departments
 
-Morning Startup → Daily Brief → Operational Hours → Lunch → Evening Wind-down → Night Processing → Weekend → Holiday
+| Department | Workers | Purpose |
+|------------|---------|---------|
+| **Intelligence** | Observatory, Sentinel | Observe reality |
+| **Knowledge** | Toolbelt | Experience information |
+| **Reasoning** | Prime | Think |
+| **Memory** | Citadel | Institutional memory |
+| **Innovation** | Forge | Create |
+| **Engineering** | BossLady | Build |
+| **Release** | Flippy | Deliver |
+| **Quality** | FIP | Measure |
 
-The campus clock drives everything. Nothing invents time.
+### Factory Services (not a department)
+Identity · Events · Search · Objects · Notifications · Automation · Permissions · Storage · Scheduling · Logging
 
-### Mission System
+Used by all. Owned by none.
 
+### The Commons (belongs to no department)
+Cafeteria · Auditorium · Training Center · Design Gallery · Innovation Wall · Recognition Hall
+
+---
+
+## Explore
+
+```bash
+npm install && npm run dev
 ```
-Mission → Objectives → Projects → Tasks → Evidence → Mission Health
-```
 
-No floating work. Everything belongs to a mission.
-
-### Request System
-
-Applications never interrupt each other. They submit **Requests** through the Factory Mailroom. BossLady accepts. Works. Returns completion. Factory records the transaction.
-
-### The Conveyor System
-
-Every artifact moves through the Factory:
-
-```
-Observe → Capture → Reason → Remember → Invent → Build → Ship → Measure → Archive
-```
-
-Watch it. Pause it. Advance it. Replay it. No magic.
-
-### Factory Mailroom
-
-Every item gets: ID · Sender · Recipient · Priority · Status · History
-
-You can always answer: **"Where is this?"**
-
-### Factory Blueprints
-
-Mounted outside every tenant entrance. Purpose · Inputs · Outputs · Shared services · Owned objects · Dependencies · Version · Health.
-
-### The Watchboard
-
-Current missions · Blocked missions · Waiting approvals · Factory health · Upcoming releases · Recently completed. Nothing hidden.
-
-### Command Center (Tower · Mission Control)
-
-Factory load · Mission progress · Department health · Recent decisions · Critical alerts · Upcoming milestones.
+1. **The Commons** — visitor welcome, org chart, floor map, cross-department projects
+2. **Any department building** — department dashboard at the entrance
+3. **Tower → War Room** — Executive Floor
+4. **Tower → Mission Control** — 60-second company overview
 
 ## Architect's Rule
 
-> **"If two tenants need to communicate, build or extend Factory infrastructure—not custom glue."**
-
-## Getting Started
-
-```bash
-npm install
-npm run dev
-```
-
-1. **Tower → Mission Control** — Command Center + Watchboard (60-second company overview)
-2. **Operations Center** (underground) — Conveyor, Mailroom, Logistics, History
-3. **Any tenant building** — Factory Blueprint mounted outside the entrance
-4. **⌘K** — Universal command palette
+Every capability must answer:
+1. Which **department** owns the mission?
+2. Which **application** performs the work?
+3. Which **Factory service** supports it?
 
 ---
 
-*The Factory is a functioning organization.*
+*Companies are organized by departments. Applications are workers assigned to departments.*
