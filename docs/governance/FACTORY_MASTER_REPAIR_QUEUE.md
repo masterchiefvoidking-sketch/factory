@@ -3,33 +3,48 @@
 **One ecosystem-wide queue.** Not per-repo silos.  
 **Code mirror:** `src/governance/repair-queue.ts`
 
-Prioritized by **dependency order** and **risk to ecosystem trust**.
+Prioritized by **dependency order** and **risk to ecosystem trust**.  
+Updated after **Proof #001 — Citadel Tenant Certification** ingest (2026-07-05).
 
 ---
+
+## Completed (evidence-backed)
+
+| ID | Repo | Reason | Evidence |
+|----|------|--------|----------|
+| **R-001** | factory-standards | Standards completion pass | Completion pass succeeded; Citadel validated at standards |
+| **R-002** | factory-core | Core completion pass | factory-core completion pass succeeded |
+| **R-003** | factory | HQ governance truth | Governance 005 docs + static Control Tower |
+| **R-004** | factory | Test/typecheck baseline | npm test, typecheck, build, lint pass |
+| **R-007** | citadel | Tenant certification verified | Proof #001 PASS 98/100; factoryCertificationReady |
+| **R-015** | factory | Proof ingest | FACTORY_PROOF_LOG.md + registry updated |
+
+---
+
+## Open — forward order (not completed)
 
 | ID | Order | Repo | Severity | Reason | Safe first action | Blockers | Done criteria |
 |----|-------|------|----------|--------|-------------------|----------|---------------|
-| **R-001** | 1 | factory-standards | Critical | Law must be trustworthy first | Validate every `imports/` zip; regenerate failures | None | All zips pass; examples synced |
-| **R-002** | 2 | factory-core | High | SDK must prove outside itself | Citadel cert package via SDK CLI | R-001 | Second tenant validated at standards |
-| **R-003** | 3 | factory | High | HQ governance truth before live claims | Complete `docs/governance/*`; static Control Tower | R-001–002 for live wire | Docs + labeled static UI |
-| **R-004** | 4 | factory | Medium | Test/typecheck baseline | Merge repair-pass scripts; test governance registry | — | All npm scripts pass |
-| **R-005** | 5 | flippy | Medium | Canonical branch unknown | Audit Mr. Flippy / Web Flip Factory repo | UNKNOWN repo | Audit + branch documented |
-| **R-006** | 6 | bosslady | Medium | Engineering workflow unproven | Forensic audit + certification | R-002 | ACTUAL_STATE_AUDIT + imports/ |
-| **R-007** | 7 | citadel | Medium | Memory integration unclear | Audit Citadel; README truth | R-002 | Audit complete |
-| **R-008** | 8 | prime | Medium | Forgina usage unverified | Audit Prime/Forgina repo | UNKNOWN | ACTUAL_STATE_AUDIT |
-| **R-009** | 9 | toolbelt | Medium | Horizon scope undecided | Clarify Horizon vs Toolbelt; audit | UNKNOWN repos | Relationship documented |
-| **R-010** | 10 | factory | High | Integration contracts unwired | Document contract; no fake wire | R-001–003 | Static registry in UI; live later |
+| **R-011** | 1 | citadel | Critical | Add CI to Citadel certification path | CI: test, build, lint, typecheck, cert:validate | R-015 done | CI runs on every change |
+| **R-012** | 2 | factory | High | Register more tenants through certification | Run cert chain; ingest proofs | R-011 pattern | Proof #002+ in log |
+| **R-005** | 3 | flippy | Medium | Resolve Mr. Flippy branch identity | Audit repo; document branch | UNKNOWN repo | Branch in registry |
+| **R-006** | 4 | bosslady | Medium | Certify BossLady | Audit + certification package | R-012 pattern | Proof if pass |
+| **R-008** | 5 | prime | Medium | Certify Forgina | Audit + cert chain | R-012 pattern | Proof if pass |
+| **R-013** | 6 | factory | High | Certify Factory itself | Run standards/core against Factory | R-004 | Self-cert proof recorded |
+| **R-009** | 7 | toolbelt | Medium | Certify Horizon after scope decision | Decide player/scope first | Scope UNKNOWN | Cert only after decision |
+| **R-010** | 8 | factory | High | Live integration contracts | Document contract; no fake wire | R-011, R-013 | Static registry first |
 
 ---
 
-## Why This Order
+## Why this order
 
-1. **Standards** — If law is wrong, every certification is meaningless.
-2. **Core** — Tenants need a proven SDK before HQ can display honest status.
-3. **Factory governance** — Control tower is documentation + registry first (this pass).
-4. **Factory quality gates** — Scripts/tests on HQ repo itself.
-5–9. **Tenants** — Only after foundation; each needs its own audit.
-10. **Live integration** — Last; requires trusted artifacts and contracts.
+1. **Citadel CI (R-011)** — First real tenant proof exists; automate the path before scaling.
+2. **More tenants (R-012)** — Repeat proven chain; grow proof log honestly.
+3. **Flippy identity (R-005)** — Release path blocked without canonical branch.
+4. **BossLady / Forgina (R-006, R-008)** — Next tenant certifications after pattern established.
+5. **Factory self-cert (R-013)** — HQ must certify itself before claiming full control tower authority.
+6. **Horizon (R-009)** — Only after explicit player/scope decision.
+7. **Live integration (R-010)** — Last; Proof #001 explicitly does not prove live wire.
 
 ---
 

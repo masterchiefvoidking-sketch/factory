@@ -54,7 +54,9 @@ Tenant applications  (BossLady, Citadel, Forge, …)
 | Tenant → standards (cert drop) | **Manual** | `imports/` folder |
 | standards → validates core package | **Working** | PASS 97/100 |
 | standards → validates factory package | **Working** | PASS 95/100 |
+| standards → validates Citadel tenant | **Working** | PASS 98/100 (Proof #001) |
 | core → self-cert | **Working** | 100/100 |
+| Citadel → Factory HQ | **Manual only** | JSON import; liveFactoryIntegration: false |
 | factory → standards/core live | **Unwired** | No npm dep, no fetch |
 | tenant → tenant | **None** | By design |
 

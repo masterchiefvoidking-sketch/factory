@@ -1,7 +1,8 @@
 /**
- * Ecosystem status table — derived from audits + governance registry.
+ * Ecosystem status table — derived from audits + governance registry + Proof #001.
  * Not live CI data unless noted.
  */
+import { FIRST_CERTIFIED_TENANT_ID, PROOF_LOG } from "./proof-log";
 import type { RepoStatusRow } from "./types";
 
 export const FACTORY_STATUS_TABLE: RepoStatusRow[] = [
@@ -19,7 +20,7 @@ export const FACTORY_STATUS_TABLE: RepoStatusRow[] = [
     factoryCertification: "N/A (is the certifier)",
     integrationStatus: "verified",
     blocker: "Stale zips/examples; no CI",
-    nextRepair: "R-001",
+    nextRepair: "Maintain; re-validate tenants",
     overall: "yellow",
   },
   {
@@ -33,10 +34,10 @@ export const FACTORY_STATUS_TABLE: RepoStatusRow[] = [
     lint: "pass",
     typecheck: "pass",
     docs: "good",
-    factoryCertification: "PASS 97/100 (standards imports)",
+    factoryCertification: "PASS 97/100 (standards imports); completion pass succeeded",
     integrationStatus: "documented",
     blocker: "Unpublished; monorepo confusion",
-    nextRepair: "R-002",
+    nextRepair: "Maintain core",
     overall: "yellow",
   },
   {
@@ -50,10 +51,10 @@ export const FACTORY_STATUS_TABLE: RepoStatusRow[] = [
     lint: "pass",
     typecheck: "pass",
     docs: "partial",
-    factoryCertification: "PASS 95/100 (standards imports)",
+    factoryCertification: "PASS 95/100 (standards imports); self-cert proof pending (R-013)",
     integrationStatus: "unwired",
     blocker: "No live tenant wire; mock ops UI",
-    nextRepair: "R-003",
+    nextRepair: "R-013",
     overall: "orange",
   },
   {
@@ -67,9 +68,9 @@ export const FACTORY_STATUS_TABLE: RepoStatusRow[] = [
     lint: "unknown",
     typecheck: "unknown",
     docs: "unknown",
-    factoryCertification: "Placeholder zip only",
+    factoryCertification: "Not certified",
     integrationStatus: "placeholder",
-    blocker: "No audit",
+    blocker: "No audit; not certified",
     nextRepair: "R-006",
     overall: "gray",
   },
@@ -84,28 +85,28 @@ export const FACTORY_STATUS_TABLE: RepoStatusRow[] = [
     lint: "unknown",
     typecheck: "unknown",
     docs: "unknown",
-    factoryCertification: "None",
+    factoryCertification: "Not certified",
     integrationStatus: "placeholder",
-    blocker: "No audit",
+    blocker: "No audit; not certified",
     nextRepair: "R-008",
     overall: "gray",
   },
   {
     repo: "citadel",
-    role: "Memory tenant",
+    role: "Local-first executive command center / institutional memory",
     department: "Memory",
-    maturity: "scaffold",
+    maturity: "beta",
     auditScore: null,
-    build: "unknown",
-    tests: "unknown",
-    lint: "unknown",
-    typecheck: "unknown",
+    build: "pass",
+    tests: "pass",
+    lint: "pass",
+    typecheck: "pass",
     docs: "unknown",
-    factoryCertification: "Placeholder zip only",
-    integrationStatus: "placeholder",
-    blocker: "No audit",
-    nextRepair: "R-007",
-    overall: "gray",
+    factoryCertification: "PASS 98/100 (Proof #001)",
+    integrationStatus: "manual",
+    blocker: "No live Factory integration; manual JSON import only; no CI on cert path",
+    nextRepair: "R-011",
+    overall: "yellow",
   },
   {
     repo: "toolbelt / horizon",
@@ -118,9 +119,9 @@ export const FACTORY_STATUS_TABLE: RepoStatusRow[] = [
     lint: "unknown",
     typecheck: "unknown",
     docs: "unknown",
-    factoryCertification: "horizon-invalid fixture only",
+    factoryCertification: "horizon-invalid fixture only; not certified",
     integrationStatus: "unknown",
-    blocker: "Horizon/Toolbelt scope UNKNOWN",
+    blocker: "Horizon/Toolbelt scope UNKNOWN; player/scope decision pending",
     nextRepair: "R-009",
     overall: "gray",
   },
@@ -135,7 +136,7 @@ export const FACTORY_STATUS_TABLE: RepoStatusRow[] = [
     lint: "unknown",
     typecheck: "unknown",
     docs: "unknown",
-    factoryCertification: "Placeholder zip only",
+    factoryCertification: "Not certified",
     integrationStatus: "placeholder",
     blocker: "Canonical branch UNKNOWN",
     nextRepair: "R-005",
@@ -213,3 +214,12 @@ export const FACTORY_STATUS_TABLE: RepoStatusRow[] = [
 
 /** Factory HQ self-status (this repo, post repair-pass scripts) */
 export const FACTORY_HQ_STATUS = FACTORY_STATUS_TABLE.find((r) => r.repo === "factory")!;
+
+const citadelProof = PROOF_LOG.find((p) => p.id === "proof-001");
+
+/** Proof summary for Control Tower static card */
+export const PROOF_SUMMARY = citadelProof
+  ? `Proof #001: ${citadelProof.repo} certified — ${citadelProof.certificationScore}/100 — manual integration only`
+  : "No proofs recorded";
+
+export const FIRST_CERTIFIED_TENANT = FIRST_CERTIFIED_TENANT_ID;

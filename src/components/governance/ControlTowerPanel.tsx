@@ -1,8 +1,8 @@
 "use client";
 
 import { REPOSITORY_REGISTRY } from "@/governance/registry";
-import { MASTER_REPAIR_QUEUE } from "@/governance/repair-queue";
-import { FACTORY_STATUS_TABLE } from "@/governance/status";
+import { OPEN_REPAIR_ITEMS } from "@/governance/repair-queue";
+import { FACTORY_STATUS_TABLE, PROOF_SUMMARY } from "@/governance/status";
 import type { HealthStatus } from "@/governance/types";
 
 const HEALTH_COLORS: Record<HealthStatus, string> = {
@@ -20,7 +20,7 @@ const HEALTH_COLORS: Record<HealthStatus, string> = {
 export function ControlTowerPanel() {
   const audited = REPOSITORY_REGISTRY.filter((r) => r.auditScore !== null);
   const unknown = REPOSITORY_REGISTRY.filter((r) => r.auditScore === null);
-  const topRepairs = MASTER_REPAIR_QUEUE.slice(0, 5);
+  const topRepairs = OPEN_REPAIR_ITEMS.slice(0, 5);
 
   return (
     <section className="rounded border border-amber-500/40 bg-amber-500/5 p-4">
@@ -33,6 +33,17 @@ export function ControlTowerPanel() {
         </p>
         <p className="mt-1 text-[9px] italic text-factory-text-muted/70">
           docs/governance/ — update registry after each repo audit
+        </p>
+      </div>
+
+      {/* Proof #001 — static, not live */}
+      <div className="mb-4 rounded border border-emerald-500/30 bg-emerald-500/5 px-3 py-2">
+        <p className="text-[10px] font-medium uppercase tracking-wider text-emerald-400">
+          Certification proof (static)
+        </p>
+        <p className="mt-1 text-xs text-factory-text">{PROOF_SUMMARY}</p>
+        <p className="mt-1 text-[9px] italic text-factory-text-muted/70">
+          Not live CI · manual JSON import only · see FACTORY_PROOF_LOG.md
         </p>
       </div>
 

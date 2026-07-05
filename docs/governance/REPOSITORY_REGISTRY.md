@@ -85,7 +85,7 @@
 |----|-----------|-----------|----------|------|----------|-------|--------|-------------|---------|
 | bosslady | BossLady | Chief Engineer | bosslady | Engineering | 1 Scaffold | — | GRAY | Placeholder | No repo audit |
 | prime | Forgina Prime | Prime, Forgina | prime | Reasoning | 1 Scaffold | — | GRAY | Placeholder | No repo audit |
-| citadel | Citadel | Archivist | citadel | Memory | 1 Scaffold | — | GRAY | Placeholder | Placeholder zip only |
+| citadel | Citadel | Archivist, Archive | citadel | Memory | **3 Beta** | — | **YELLOW** | **Manual** | **PASS 98/100 (Proof #001)**; no live wire; no CI on cert path |
 | toolbelt | Toolbelt | Horizon (?) | toolbelt | Knowledge | 1 Scaffold | — | GRAY | Unknown | Horizon relationship UNKNOWN |
 | flippy | Mr. Flippy | Flippy, Web Flip Factory | flippy | Release | 1 Scaffold | — | GRAY | Placeholder | Canonical branch UNKNOWN |
 | forge | Forge | Innovation Lab | forge | Innovation | 1 Scaffold | — | GRAY | Placeholder | No audit |
@@ -103,7 +103,24 @@
 | `imports/factory-core/` | SDK | PASS 97/100 |
 | `imports/examples/citadel-valid/` | Test fixture | PASS 98/100 |
 | `imports/examples/horizon-invalid/` | Negative fixture | FAIL 75/100 (intentional) |
-| `imports/{citadel,bosslady,forgina,horizon}/` | Tenants | Placeholder zip only |
+| **Citadel (tenant repo)** | **Real tenant** | **PASS 98/100 — Proof #001** (manual import; not live) |
+| `imports/{bosslady,forgina,horizon}/` | Tenants | Placeholder zip only |
+
+### Citadel — first certified tenant (Proof #001)
+
+| Field | Value |
+|-------|-------|
+| Department | Memory |
+| Building | Citadel / Archive |
+| Role | Local-first executive command center / institutional memory |
+| Certification | **PASS 98/100** |
+| Integration | Manual JSON import only — **not live** |
+| Maturity | Beta — **not Daily Driver** |
+| factoryCertificationReady | yes |
+| dailyDriverReady | no |
+| liveFactoryIntegration | no |
+| Blocker | No live Factory integration; CI not on cert path |
+| Evidence | `FACTORY_PROOF_LOG.md` Proof #001 |
 
 ---
 

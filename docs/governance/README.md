@@ -12,8 +12,10 @@
 | [FACTORY_MASTER_REPAIR_QUEUE.md](./FACTORY_MASTER_REPAIR_QUEUE.md) | Single ecosystem repair order |
 | [FACTORY_RELEASE_LAW.md](./FACTORY_RELEASE_LAW.md) | Release and maturity requirements |
 | [FACTORY_STATUS.md](./FACTORY_STATUS.md) | Current health table (all repos) |
+| [FACTORY_PROOF_LOG.md](./FACTORY_PROOF_LOG.md) | Verified tenant certification proofs |
 | [FACTORY_CONTROL_TOWER.md](./FACTORY_CONTROL_TOWER.md) | Mission Control design + code homes |
 | [FACTORY_GOVERNANCE_RESULT.md](./FACTORY_GOVERNANCE_RESULT.md) | Pass 005 verification results |
+| [FACTORY_CITADEL_PROOF_INGEST_RESULT.md](./FACTORY_CITADEL_PROOF_INGEST_RESULT.md) | Proof #001 ingest verification |
 
 **Related (outside governance):**
 

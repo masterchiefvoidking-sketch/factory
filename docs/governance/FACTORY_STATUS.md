@@ -5,18 +5,20 @@
 
 **Legend:** GREEN reliable · YELLOW useful incomplete · ORANGE prototype/risky · RED blocked · GRAY unknown
 
+**First certified tenant:** Citadel (Proof #001) — PASS 98/100 — manual integration only
+
 ---
 
 | Repo | Role | Department | Maturity | Audit | Build | Tests | Lint | Typecheck | Docs | Factory cert | Integration | Blocker | Next repair | Overall |
 |------|------|------------|----------|-------|-------|-------|------|-----------|------|--------------|-------------|---------|-------------|---------|
-| factory-standards | The Law | Factory Services | Beta (3) | 83 | pass | pass | pass | **missing** | good | N/A | verified | Stale zips; no CI | R-001 | **YELLOW** |
-| factory-core | SDK | Factory Services | Prototype (2) | 74 | pass | pass | pass | pass | good | PASS 97 | documented | Unpublished; split confusion | R-002 | **YELLOW** |
-| **factory** | HQ / Control Tower | Executive | Prototype (2) | 52 | pass | pass | pass | pass | partial | PASS 95 | unwired | Mock ops UI; no live wire | R-003 | **ORANGE** |
-| bosslady | Engineering | Engineering | Scaffold (1) | — | ? | ? | ? | ? | ? | placeholder | placeholder | No audit | R-006 | **GRAY** |
-| prime / forgina | Reasoning | Reasoning | Scaffold (1) | — | ? | ? | ? | ? | ? | none | placeholder | No audit | R-008 | **GRAY** |
-| citadel | Memory | Memory | Scaffold (1) | — | ? | ? | ? | ? | ? | placeholder | placeholder | No audit | R-007 | **GRAY** |
-| toolbelt / horizon | Knowledge | Knowledge | Scaffold (1) | — | ? | ? | ? | ? | ? | horizon fixture | unknown | Scope UNKNOWN | R-009 | **GRAY** |
-| flippy | Release | Release | Scaffold (1) | — | ? | ? | ? | ? | ? | placeholder | placeholder | Branch UNKNOWN | R-005 | **GRAY** |
+| factory-standards | The Law | Factory Services | Beta (3) | 83 | pass | pass | pass | **missing** | good | N/A | verified | Stale zips; no CI | Maintain | **YELLOW** |
+| factory-core | SDK | Factory Services | Prototype (2) | 74 | pass | pass | pass | pass | good | PASS 97; completion pass OK | documented | Unpublished; split confusion | Maintain | **YELLOW** |
+| **factory** | HQ / Control Tower | Executive | Prototype (2) | 52 | pass | pass | pass | pass | partial | PASS 95; self-cert pending | unwired | Mock ops UI; no live wire | R-013 | **ORANGE** |
+| bosslady | Engineering | Engineering | Scaffold (1) | — | ? | ? | ? | ? | ? | not certified | placeholder | No audit | R-006 | **GRAY** |
+| prime / forgina | Reasoning | Reasoning | Scaffold (1) | — | ? | ? | ? | ? | ? | not certified | placeholder | No audit | R-008 | **GRAY** |
+| **citadel** | Executive command center / memory | Memory | **Beta (3)** | — | pass | 59/59 | 0 err / 7 warn | pass | ? | **PASS 98** (Proof #001) | **manual** | No live wire; no CI on cert path | **R-011** | **YELLOW** |
+| toolbelt / horizon | Knowledge | Knowledge | Scaffold (1) | — | ? | ? | ? | ? | ? | fixture only | unknown | Scope UNKNOWN | R-009 | **GRAY** |
+| flippy | Release | Release | Scaffold (1) | — | ? | ? | ? | ? | ? | not certified | placeholder | Branch UNKNOWN | R-005 | **GRAY** |
 | forge | Innovation | Innovation | Scaffold (1) | — | ? | ? | ? | ? | ? | none | placeholder | No audit | — | **GRAY** |
 | fip | Quality | Quality | Scaffold (1) | — | ? | ? | ? | ? | ? | none | placeholder | No audit | — | **GRAY** |
 | observatory | Intelligence | Intelligence | Scaffold (1) | — | ? | ? | ? | ? | ? | none | placeholder | No audit | — | **GRAY** |
@@ -28,17 +30,19 @@
 
 | Field | Value |
 |-------|-------|
-| Governance pass | 005 — Mill Control Tower |
+| Governance pass | 005 — Mill Control Tower + Proof #001 ingest |
 | Scripts | dev, build, start, lint, typecheck, test |
-| Governance docs | `docs/governance/` (10 files) |
-| Control Tower UI | Tower → Mission Control → static panel |
+| Governance docs | `docs/governance/` (12+ files incl. FACTORY_PROOF_LOG) |
+| Control Tower UI | Tower → Mission Control → static panel + Proof #001 card |
 | Live CI feed | **Not implemented** |
-| Next safest repair | **R-003** (this pass) then **R-001** ecosystem |
+| First certified tenant | Citadel — 98/100 — manual only |
+| Next safest repair | **R-011** (Citadel CI) |
 
 ---
 
 ## Ecosystem summary
 
-- **3 audited repos** — 0 at GREEN overall
-- **9+ tenant programs** — all GRAY (unknown)
-- **Critical path:** R-001 → R-002 → R-003 → R-010
+- **3 audited foundation repos** — 0 at GREEN overall
+- **1 certified tenant proof** — Citadel (YELLOW; not Daily Driver; not live integrated)
+- **8+ tenant programs** — remaining GRAY (unknown or not certified)
+- **Critical path:** R-011 → R-012 → tenant certifications → R-013 (Factory self-cert)

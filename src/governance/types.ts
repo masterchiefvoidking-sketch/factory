@@ -36,6 +36,7 @@ export type HealthStatus = (typeof HEALTH_STATUSES)[number];
 export const INTEGRATION_STATUSES = [
   "verified",
   "documented",
+  "manual",
   "placeholder",
   "unwired",
   "unknown",
@@ -66,7 +67,26 @@ export interface RepositoryEntry {
   blockers: string[];
   evidenceSource: string;
   confidence: ConfidenceLevel;
+  /** factory-standards certification package result */
+  certificationStatus?: "pass" | "fail" | "none" | "placeholder";
+  certificationScore?: number | null;
+  factoryCertificationReady?: boolean;
+  dailyDriverReady?: boolean;
+  liveFactoryIntegration?: boolean;
   notes?: string;
+}
+
+export interface ProofLogEntry {
+  id: string;
+  title: string;
+  date: string;
+  repo: string;
+  branch: string;
+  prNumber: string;
+  certificationScore: number;
+  proves: string[];
+  doesNotProve: string[];
+  commandResults: Record<string, string>;
 }
 
 export interface RepairQueueItem {
@@ -74,6 +94,7 @@ export interface RepairQueueItem {
   repo: string;
   severity: "critical" | "high" | "medium" | "low";
   dependencyOrder: number;
+  status: "open" | "completed";
   reason: string;
   evidence: string;
   safeFirstAction: string;
