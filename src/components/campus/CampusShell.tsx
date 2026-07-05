@@ -7,6 +7,7 @@ import { PowerControls } from "@/components/atmosphere/PowerControls";
 import { CampusMap } from "@/components/transit/CampusMap";
 import { TravelOverlay } from "@/components/transit/TravelOverlay";
 import { SecurityPanel } from "@/components/security/SecurityPanel";
+import { CommandPalette } from "@/components/nexus/CommandPalette";
 import { useFactory } from "@/context/FactoryContext";
 import { FOUNDATION_PRINCIPLE } from "@/domain/types";
 
@@ -21,6 +22,7 @@ export function CampusShell({ children }: { children?: React.ReactNode }) {
     <div className="flex h-screen flex-col">
       <ShiftLighting />
       <TravelOverlay />
+      <CommandPalette />
 
       <header className="flex items-center justify-between border-b border-factory-accent-dim/20 bg-factory-bg-surface/80 px-6 py-3 backdrop-blur-sm">
         <div className="flex items-center gap-4">

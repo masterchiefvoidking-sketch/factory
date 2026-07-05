@@ -102,7 +102,7 @@ export function CampusMap() {
 
             {/* Building list */}
             <div className="max-h-40 space-y-0.5 overflow-y-auto">
-              {[...SURFACE_BUILDINGS, "garden" as BuildingId, "engine-room" as BuildingId].map((id) => {
+              {[...SURFACE_BUILDINGS, "garden" as BuildingId, "engine-room" as BuildingId, "utility-floor" as BuildingId, "operations-center" as BuildingId].map((id) => {
                 const b = BUILDINGS[id];
                 const isCurrent = location.buildingId === id;
                 const accessible = canEnter(id);

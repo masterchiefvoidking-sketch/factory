@@ -137,7 +137,7 @@ export type PowerState = (typeof POWER_STATES)[number];
 
 // ─── Campus Buildings ────────────────────────────────────────────────────────
 
-/** Nine surface buildings + underground + garden */
+/** Nine surface buildings + underground + garden + nexus infrastructure */
 export const BUILDING_IDS = [
   "tower",
   "observatory",
@@ -150,6 +150,8 @@ export const BUILDING_IDS = [
   "fip",
   "flippy",
   "engine-room",
+  "utility-floor",
+  "operations-center",
   "garden",
 ] as const;
 

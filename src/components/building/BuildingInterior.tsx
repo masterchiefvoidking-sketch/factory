@@ -5,6 +5,7 @@ import { useFactory } from "@/context/FactoryContext";
 import { getEmployeesInBuilding } from "@/domain/registry";
 import { WallDisplay } from "./WallDisplay";
 import { WindowView } from "@/components/atmosphere/WindowView";
+import { TenantSkybridges } from "@/components/nexus/TenantSkybridges";
 
 const INSTINCT_LABELS: Record<string, string> = {
   exploration: "Exploration",
@@ -179,6 +180,8 @@ export function BuildingInterior() {
               <p className="text-sm text-factory-text">{currentBuilding.soundscape}</p>
             </div>
           </section>
+
+          <TenantSkybridges buildingId={currentBuilding.id} />
         </div>
       </div>
     </motion.div>

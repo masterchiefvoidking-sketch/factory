@@ -328,6 +328,69 @@ export const BUILDINGS: Record<BuildingId, Building> = {
     quotes: ["Nobody sees this.", "If it breaks, everything stops."],
   },
 
+  "utility-floor": {
+    id: "utility-floor",
+    name: "The Utility Floor",
+    tagline: "No tenant owns these. The Factory does.",
+    role: "Utilities Department — shared infrastructure",
+    purpose:
+      "Authentication. Search. Notifications. File storage. Object IDs. Logging. Automation. Scheduling. Background jobs. Settings. Themes. Keyboard shortcuts. Export/import. Audit history. Project Nexus lives here.",
+    neverDoes: "Belong to any tenant. No tenant reinvents these.",
+    material: "Industrial utility corridors, service panels, cable trays",
+    instinct: "mastery",
+    soundscape: "Deep machinery hum, service panels clicking",
+    clearanceRequired: "engineer",
+    accent: "#5d6d7e",
+    glyph: "🔌",
+    position: { x: 42, y: 50 },
+    underground: true,
+    wallContent: [
+      {
+        type: "principle",
+        title: "The First Law",
+        content: "Applications never communicate directly. They communicate through Factory infrastructure.",
+      },
+      {
+        type: "blueprint",
+        title: "Shared Services",
+        content: "Identity · Object Registry · Event Bus · Search · Clipboard · File Exchange · Permissions",
+      },
+    ],
+    quotes: [
+      "Don't make every tenant reinvent it.",
+      "The Factory has a Utilities Department.",
+    ],
+  },
+
+  "operations-center": {
+    id: "operations-center",
+    name: "The Operations Center",
+    tagline: "One room. Shared by everyone. No business logic.",
+    role: "Factory operations monitoring",
+    purpose:
+      "System health. Event traffic. Queue depth. Automation status. Background jobs. Storage. Search indexing. Connector health. Just Factory operations.",
+    neverDoes: "Run business logic. This is infrastructure operations only.",
+    material: "Mission control panels, status walls, monitoring displays",
+    instinct: "mastery",
+    soundscape: "Quiet operational hum, occasional alert chime",
+    clearanceRequired: "architect",
+    accent: "#1abc9c",
+    glyph: "📡",
+    position: { x: 58, y: 50 },
+    underground: true,
+    wallContent: [
+      {
+        type: "dashboard",
+        title: "Live Operations",
+        content: "All services online · Event bus nominal · 0 queue backlog",
+      },
+    ],
+    quotes: [
+      "No business logic. Just Factory operations.",
+      "One room. Shared by everyone.",
+    ],
+  },
+
   garden: {
     id: "garden",
     name: "The Garden",
@@ -469,6 +532,8 @@ export const TRANSIT_ROUTES: TransitRoute[] = [
   { from: "prime", to: "fip", mode: "hallway", durationMs: 1200, description: "Laboratory corridor" },
   { from: "bosslady", to: "flippy", mode: "autonomous-cart", durationMs: 2200, description: "Autonomous cart to the shipping dock" },
   { from: "commons", to: "engine-room", mode: "elevator", durationMs: 3000, description: "Service elevator descending underground" },
+  { from: "engine-room", to: "utility-floor", mode: "underground-rail", durationMs: 1200, description: "Utility corridor rail" },
+  { from: "utility-floor", to: "operations-center", mode: "hallway", durationMs: 800, description: "Operations corridor" },
   { from: "flippy", to: "garden", mode: "hallway", durationMs: 1500, description: "Garden path past the loading bays" },
   { from: "tower", to: "prime", mode: "skybridge", durationMs: 2000, description: "East skybridge" },
 ];
