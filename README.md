@@ -1,81 +1,67 @@
 # The Factory
 
-**MASTER ARCHITECTURE V1.0 — Codename: TITAN CAMPUS**
+**MASTER ARCHITECTURE V1.0** — Titan Campus  
+**PROJECT NEXUS** — FACTORY MASTER PROMPT 002
 
-> Morgan doesn't launch software. He arrives at Headquarters.
+> Applications never communicate directly. They communicate through Factory infrastructure.
 
 ---
 
 ## What This Is
 
-The Factory is a **physical place**. Every program is merely a tenant. The Factory itself is the product.
+The Factory is a **physical place** and an **operating platform**.
 
-This is building architecture — Apple Park meets NASA meets Disney meets MIT meets the Pentagon.
+- **Titan Campus** (V1.0) — the buildings, the spatial headquarters
+- **Project Nexus** (V2.0) — the invisible infrastructure that lets every tenant cooperate
 
-## Foundation Stone
+Tenants are **frozen**: Prime, Toolbelt, BossLady, Citadel, Forge, Flippy, FIP, Observatory, Sentinel.  
+We don't redesign them. We build the campus that lets them work together.
 
-> **"Every room has one purpose. Every purpose has one room."**
+## The First Law
 
-## The Campus
+> Applications never communicate directly. They communicate through Factory infrastructure.
 
-Nine buildings revolve around **The Tower**. Connected underground. Connected digitally. Connected philosophically.
+## Shared Services (Utility Floor)
 
-```
-                     OBSERVATORY
-                           ▲
-            ┌──────────────┼──────────────┐
-            │          THE TOWER          │
-            │   F1 Atrium · F2 Mission    │
-            │   Control · F3 War Room     │
-            └───────┬──────┼──────┬───────┘
-         TOOLBELT   │  COMMONS  │  CITADEL
-                    FORGE  PRIME
-                 BOSSLADY    FIP
-                        FLIPPY
-```
+| Service | Purpose |
+|---------|---------|
+| Factory Identity | Authentication & tenant identity |
+| Object Registry | ONE object. ONE ID. Every tenant references the same canonical object. |
+| Event Bus | Every important action emits an event |
+| Notification Center | One inbox. Not nine. |
+| Search | One search. Every application contributes. |
+| Activity Stream | Operational history. Not chat. |
+| Clipboard | Copy anywhere. Paste anywhere. |
+| File Exchange | Documents, images, reports — one protocol |
+| Permission Engine | Visitor → System. Same model everywhere. |
+| API Gateway | No direct tenant-to-tenant calls |
+| Extension System | Future tenants plug in without modifying the Factory |
 
-Plus **The Garden** (no screens, just sky) and **The Engine Room** (underground).
+## The Object Registry
 
-| Building | Tenant | Badge | Soundscape |
-|----------|--------|-------|------------|
-| **The Tower** | Morgan (Headquarters) | Gold | Calm HVAC |
-| **The Observatory** | World Monitor | Purple | Soft radio chatter |
-| **Toolbelt** | Media Curator | Blue | Library silence |
-| **Citadel** | Chief Archivist | Bronze | Echoing stone |
-| **The Forge** | Research Lead | Red | Industrial ambience |
-| **The Commons** | Everyone | Green | Fountain murmur |
-| **Prime** | Strategic Intelligence | White | Quiet processing |
-| **BossLady** | Chief Engineer | Orange | Mechanical keyboards |
-| **FIP** | Metrics Analyst | Green | Laboratory silence |
-| **Flippy** | Release Captain | Yellow | Packaging machines |
+One canonical object. Not nine versions.
 
-## The Tower (Three Floors)
+`Project` · `Task` · `Decision` · `Business` · `Repository` · `Signal` · `Media` · `Report` · `Package` · `Contact` · `Company` · `Idea`
 
-1. **The Atrium** — Grand Central Terminal. Departure board shows where every employee is right now. Digital globe. Where every day begins.
-2. **Mission Control** — NASA, not dashboards. Factory status. Missions. Blockers. Launch countdowns. You stand.
-3. **War Room** — Whiteboards. Glass. Strategy. No coding. Only thinking.
+**Example:** Toolbelt bookmarks NASA. Prime reasons about NASA. Citadel remembers NASA. BossLady builds NASA integration. Same object. Same ID. Different perspectives.
 
-## Five Human Instincts
+## Underground Infrastructure
 
-Every hallway reinforces one:
+| Location | Purpose |
+|----------|---------|
+| **Engine Room** | Servers, pipes, power — the machinery beneath everything |
+| **Utility Floor** | Shared services. No tenant owns these. |
+| **Operations Center** | System health, event traffic, connector status |
 
-- **Exploration** — The Forge
-- **Mastery** — BossLady, FIP, Citadel
-- **Belonging** — The Commons, The Garden, The Atrium
-- **Curiosity** — The Observatory, Toolbelt, War Room
-- **Purpose** — The Tower, Prime, Flippy
+## The Factory Contract
 
-## Transportation
+Every tenant **may**: register objects, publish/subscribe events, use Factory search, identity, clipboard, storage.
 
-No sidebar. Campus map with radial layout. Travel via:
+Every tenant **may not**: duplicate shared infrastructure, invent new identity/notification/search systems, communicate directly with other tenants.
 
-- Elevators (Tower floors, underground)
-- Skybridges
-- Glass tunnels
-- Moving walkways
-- Autonomous carts
+## Command Palette
 
-Nothing teleports. You travel.
+Press **⌘K** anywhere in the Factory. Universal search and tenant commands.
 
 ## Getting Started
 
@@ -84,16 +70,8 @@ npm install
 npm run dev
 ```
 
-You arrive in **The Tower Atrium**. Open the campus map (bottom-right). Travel.
-
-## Adding a Building
-
-1. Add to `BUILDING_IDS` in `src/domain/types.ts`
-2. Define in `BUILDINGS` in `src/domain/registry.ts` with position, material, instinct, soundscape
-3. It appears on the campus map automatically
-
-The architecture never changes shape. It only grows.
+Arrive at The Tower. Travel underground to the Utility Floor. Open Operations Center. Press ⌘K.
 
 ---
 
-*Before Prime existed... there was a building.*
+*Adding the tenth application requires almost no Factory changes. It simply plugs in.*
