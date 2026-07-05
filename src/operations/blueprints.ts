@@ -1,0 +1,111 @@
+import type { TenantId } from "@/nexus/types";
+import type { TenantBlueprint } from "./types";
+
+/**
+ * Factory Blueprints
+ *
+ * Mounted outside every tenant entrance.
+ * A new engineer understands the Factory just by walking the halls.
+ */
+
+export const TENANT_BLUEPRINTS: Record<TenantId, TenantBlueprint> = {
+  observatory: {
+    tenantId: "observatory",
+    purpose: "Watch external world. Detect signals entering the Factory.",
+    inputs: ["World feeds", "Satellite data", "Market streams", "News APIs"],
+    outputs: ["Signal objects", "Alert events"],
+    sharedServices: ["event-bus", "object-registry", "search"],
+    ownedObjects: ["Signal"],
+    dependencies: [],
+    version: "2.4.1",
+    health: "healthy",
+  },
+  sentinel: {
+    tenantId: "sentinel",
+    purpose: "Capture changes from signals. Create Change Objects.",
+    inputs: ["Signal objects", "Security feeds"],
+    outputs: ["Change objects", "Threat alerts"],
+    sharedServices: ["event-bus", "object-registry", "notification-center"],
+    ownedObjects: ["Change"],
+    dependencies: ["observatory"],
+    version: "1.2.0",
+    health: "healthy",
+  },
+  prime: {
+    tenantId: "prime",
+    purpose: "Strategic reasoning. Create decisions from captured intelligence.",
+    inputs: ["Change objects", "Signal objects", "Mission context"],
+    outputs: ["Decision objects", "Reasoning reports"],
+    sharedServices: ["object-registry", "event-bus", "search", "activity-stream"],
+    ownedObjects: ["Decision", "Idea"],
+    dependencies: ["observatory", "sentinel", "citadel"],
+    version: "3.1.0",
+    health: "healthy",
+  },
+  forge: {
+    tenantId: "forge",
+    purpose: "Evaluate ideas. Create venture proposals from decisions.",
+    inputs: ["Decision objects", "Signal objects", "Business models"],
+    outputs: ["Venture proposals", "Validation reports"],
+    sharedServices: ["object-registry", "event-bus", "file-exchange"],
+    ownedObjects: ["Business", "Idea"],
+    dependencies: ["prime"],
+    version: "1.8.2",
+    health: "healthy",
+  },
+  bosslady: {
+    tenantId: "bosslady",
+    purpose: "Execute builds. Implement features from approved requests.",
+    inputs: ["Build requests", "Repository objects", "Feature specs"],
+    outputs: ["Build artifacts", "Repository updates"],
+    sharedServices: ["object-registry", "event-bus", "file-exchange", "logging"],
+    ownedObjects: ["Repository", "Task"],
+    dependencies: ["prime", "forge"],
+    version: "4.0.1",
+    health: "healthy",
+  },
+  flippy: {
+    tenantId: "flippy",
+    purpose: "Package and ship releases. Distribute artifacts.",
+    inputs: ["Build artifacts", "Package objects", "Release requests"],
+    outputs: ["Release packages", "Distribution manifests"],
+    sharedServices: ["package-exchange", "event-bus", "object-registry"],
+    ownedObjects: ["Package"],
+    dependencies: ["bosslady"],
+    version: "2.1.3",
+    health: "healthy",
+  },
+  fip: {
+    tenantId: "fip",
+    purpose: "Measure everything. Create metrics from shipped releases.",
+    inputs: ["Release packages", "Usage events", "Benchmark targets"],
+    outputs: ["Metrics reports", "Regression alerts"],
+    sharedServices: ["event-bus", "object-registry", "logging", "search"],
+    ownedObjects: ["Report"],
+    dependencies: ["flippy"],
+    version: "3.0.0",
+    health: "healthy",
+  },
+  citadel: {
+    tenantId: "citadel",
+    purpose: "Remember everything. Archive all artifacts permanently.",
+    inputs: ["All object types", "Decision records", "Release history"],
+    outputs: ["Archive records", "Audit trails"],
+    sharedServices: ["object-registry", "activity-stream", "search", "logging"],
+    ownedObjects: ["Decision", "Report", "Project"],
+    dependencies: [],
+    version: "5.2.0",
+    health: "healthy",
+  },
+  toolbelt: {
+    tenantId: "toolbelt",
+    purpose: "Curate media. Bookmark and organize knowledge objects.",
+    inputs: ["Media feeds", "Document objects", "External content"],
+    outputs: ["Media objects", "Curated collections"],
+    sharedServices: ["object-registry", "file-exchange", "search", "clipboard"],
+    ownedObjects: ["Media"],
+    dependencies: ["observatory"],
+    version: "2.7.0",
+    health: "healthy",
+  },
+};

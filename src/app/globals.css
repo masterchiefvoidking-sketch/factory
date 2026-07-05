@@ -1,0 +1,99 @@
+@import "tailwindcss";
+
+:root {
+  --factory-bg-deep: #0a0c10;
+  --factory-bg-surface: #12151c;
+  --factory-bg-elevated: #1a1f2a;
+  --factory-accent: #c9a227;
+  --factory-accent-dim: #8a7020;
+  --factory-text: #e8e6e3;
+  --factory-text-muted: #8b919a;
+  --factory-emergency: #ff4444;
+  --factory-glow: rgba(201, 162, 39, 0.15);
+}
+
+@theme inline {
+  --color-factory-bg-deep: var(--factory-bg-deep);
+  --color-factory-bg-surface: var(--factory-bg-surface);
+  --color-factory-bg-elevated: var(--factory-bg-elevated);
+  --color-factory-accent: var(--factory-accent);
+  --color-factory-accent-dim: var(--factory-accent-dim);
+  --color-factory-text: var(--factory-text);
+  --color-factory-text-muted: var(--factory-text-muted);
+  --color-factory-emergency: var(--factory-emergency);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  background: var(--factory-bg-deep);
+  color: var(--factory-text);
+  overflow: hidden;
+}
+
+/* Shift-based ambient lighting */
+body[data-shift="morning"] {
+  --ambient-hue: 45;
+  --ambient-brightness: 1;
+}
+
+body[data-shift="night"] {
+  --ambient-hue: 220;
+  --ambient-brightness: 0.6;
+}
+
+body[data-shift="weekend"] {
+  --ambient-hue: 160;
+  --ambient-brightness: 0.85;
+}
+
+body[data-shift="holiday"] {
+  --ambient-hue: 0;
+  --ambient-brightness: 0.9;
+}
+
+/* Time-of-day lighting (Master Architecture V1.0) */
+body[data-time="morning"] {
+  --time-tint: rgba(255, 200, 120, 0.04);
+}
+
+body[data-time="lunch"] {
+  --time-tint: rgba(255, 255, 240, 0.03);
+}
+
+body[data-time="night"] {
+  --time-tint: rgba(60, 100, 200, 0.06);
+}
+
+body[data-time="maintenance"] {
+  --time-tint: rgba(255, 50, 50, 0.08);
+}
+
+/* Elevator travel effect */
+@keyframes machinery-hum {
+  0%, 100% { opacity: 0.03; }
+  50% { opacity: 0.08; }
+}
+
+.factory-machinery-overlay {
+  animation: machinery-hum 2s ease-in-out infinite;
+}
+
+/* Scrollbar styling for building interiors */
+.factory-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+.factory-scroll::-webkit-scrollbar-track {
+  background: var(--factory-bg-deep);
+}
+.factory-scroll::-webkit-scrollbar-thumb {
+  background: var(--factory-accent-dim);
+  border-radius: 3px;
+}
