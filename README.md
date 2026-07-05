@@ -1,67 +1,78 @@
 # The Factory
 
 **MASTER ARCHITECTURE V1.0** — Titan Campus  
-**PROJECT NEXUS** — FACTORY MASTER PROMPT 002
+**PROJECT NEXUS** — FACTORY MASTER PROMPT 002  
+**PROJECT OPERATIONS** — FACTORY MASTER PROMPT 003
 
-> Applications never communicate directly. They communicate through Factory infrastructure.
+> Morgan understands the entire company in under sixty seconds.
 
 ---
 
-## What This Is
+## Three Layers
 
-The Factory is a **physical place** and an **operating platform**.
+| Layer | Codename | What It Is |
+|-------|----------|------------|
+| **Buildings** | Titan Campus | Spatial headquarters — where you are |
+| **Infrastructure** | Project Nexus | Shared services — how tenants cooperate |
+| **Operations** | Project Operations | Company OS — how work gets coordinated |
 
-- **Titan Campus** (V1.0) — the buildings, the spatial headquarters
-- **Project Nexus** (V2.0) — the invisible infrastructure that lets every tenant cooperate
+Tenants are **frozen**. Prime remains Prime. BossLady remains BossLady. The Factory coordinates the work.
 
-Tenants are **frozen**: Prime, Toolbelt, BossLady, Citadel, Forge, Flippy, FIP, Observatory, Sentinel.  
-We don't redesign them. We build the campus that lets them work together.
+## Project Operations
 
-## The First Law
+### The Company Operates 24/7
 
-> Applications never communicate directly. They communicate through Factory infrastructure.
+Departments report state: Idle · Working · Waiting · Blocked · Review · Maintenance · Offline
 
-## Shared Services (Utility Floor)
+### Daily Rhythm
 
-| Service | Purpose |
-|---------|---------|
-| Factory Identity | Authentication & tenant identity |
-| Object Registry | ONE object. ONE ID. Every tenant references the same canonical object. |
-| Event Bus | Every important action emits an event |
-| Notification Center | One inbox. Not nine. |
-| Search | One search. Every application contributes. |
-| Activity Stream | Operational history. Not chat. |
-| Clipboard | Copy anywhere. Paste anywhere. |
-| File Exchange | Documents, images, reports — one protocol |
-| Permission Engine | Visitor → System. Same model everywhere. |
-| API Gateway | No direct tenant-to-tenant calls |
-| Extension System | Future tenants plug in without modifying the Factory |
+Morning Startup → Daily Brief → Operational Hours → Lunch → Evening Wind-down → Night Processing → Weekend → Holiday
 
-## The Object Registry
+The campus clock drives everything. Nothing invents time.
 
-One canonical object. Not nine versions.
+### Mission System
 
-`Project` · `Task` · `Decision` · `Business` · `Repository` · `Signal` · `Media` · `Report` · `Package` · `Contact` · `Company` · `Idea`
+```
+Mission → Objectives → Projects → Tasks → Evidence → Mission Health
+```
 
-**Example:** Toolbelt bookmarks NASA. Prime reasons about NASA. Citadel remembers NASA. BossLady builds NASA integration. Same object. Same ID. Different perspectives.
+No floating work. Everything belongs to a mission.
 
-## Underground Infrastructure
+### Request System
 
-| Location | Purpose |
-|----------|---------|
-| **Engine Room** | Servers, pipes, power — the machinery beneath everything |
-| **Utility Floor** | Shared services. No tenant owns these. |
-| **Operations Center** | System health, event traffic, connector status |
+Applications never interrupt each other. They submit **Requests** through the Factory Mailroom. BossLady accepts. Works. Returns completion. Factory records the transaction.
 
-## The Factory Contract
+### The Conveyor System
 
-Every tenant **may**: register objects, publish/subscribe events, use Factory search, identity, clipboard, storage.
+Every artifact moves through the Factory:
 
-Every tenant **may not**: duplicate shared infrastructure, invent new identity/notification/search systems, communicate directly with other tenants.
+```
+Observe → Capture → Reason → Remember → Invent → Build → Ship → Measure → Archive
+```
 
-## Command Palette
+Watch it. Pause it. Advance it. Replay it. No magic.
 
-Press **⌘K** anywhere in the Factory. Universal search and tenant commands.
+### Factory Mailroom
+
+Every item gets: ID · Sender · Recipient · Priority · Status · History
+
+You can always answer: **"Where is this?"**
+
+### Factory Blueprints
+
+Mounted outside every tenant entrance. Purpose · Inputs · Outputs · Shared services · Owned objects · Dependencies · Version · Health.
+
+### The Watchboard
+
+Current missions · Blocked missions · Waiting approvals · Factory health · Upcoming releases · Recently completed. Nothing hidden.
+
+### Command Center (Tower · Mission Control)
+
+Factory load · Mission progress · Department health · Recent decisions · Critical alerts · Upcoming milestones.
+
+## Architect's Rule
+
+> **"If two tenants need to communicate, build or extend Factory infrastructure—not custom glue."**
 
 ## Getting Started
 
@@ -70,8 +81,11 @@ npm install
 npm run dev
 ```
 
-Arrive at The Tower. Travel underground to the Utility Floor. Open Operations Center. Press ⌘K.
+1. **Tower → Mission Control** — Command Center + Watchboard (60-second company overview)
+2. **Operations Center** (underground) — Conveyor, Mailroom, Logistics, History
+3. **Any tenant building** — Factory Blueprint mounted outside the entrance
+4. **⌘K** — Universal command palette
 
 ---
 
-*Adding the tenth application requires almost no Factory changes. It simply plugs in.*
+*The Factory is a functioning organization.*

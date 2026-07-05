@@ -3,6 +3,8 @@
 import { motion } from "framer-motion";
 import { useFactory } from "@/context/FactoryContext";
 import { DepartureBoard } from "./DepartureBoard";
+import { CommandCenter } from "@/components/operations/CommandCenter";
+import { Watchboard } from "@/components/operations/Watchboard";
 import { FOUNDATION_PRINCIPLE } from "@/domain/types";
 
 export function TowerInterior() {
@@ -93,24 +95,10 @@ function MissionControlFloor() {
   return (
     <div className="space-y-6">
       <p className="text-sm text-factory-text-muted">
-        NASA, not dashboards. You stand. You don&apos;t sit. This is where decisions happen.
+        NASA, not dashboards. You stand. You don&apos;t sit. Morgan understands the entire company in under sixty seconds.
       </p>
-
-      <div className="grid gap-4 md:grid-cols-2">
-        <StatusWall title="Factory Status" items={[
-          "12 buildings online",
-          "Morning shift active",
-          "All power nominal",
-          "0 critical blockers",
-        ]} />
-        <StatusWall title="Current Missions" items={[
-          "Erect Titan Campus V1.0",
-          "Install departure board",
-          "Establish spatial memory",
-        ]} />
-        <StatusWall title="Blockers" items={["None"]} accent="#2ecc71" />
-        <StatusWall title="Launch Countdowns" items={["v0.1.0 — T-4:22:00"]} accent="#f1c40f" />
-      </div>
+      <CommandCenter />
+      <Watchboard />
     </div>
   );
 }
@@ -139,34 +127,6 @@ function WarRoomFloor() {
           </div>
         ))}
       </div>
-    </div>
-  );
-}
-
-function StatusWall({
-  title,
-  items,
-  accent = "#c9a227",
-}: {
-  title: string;
-  items: string[];
-  accent?: string;
-}) {
-  return (
-    <div
-      className="rounded border border-factory-accent-dim/20 bg-factory-bg-elevated/30 p-4"
-      style={{ borderTopColor: accent, borderTopWidth: 2 }}
-    >
-      <p className="text-[10px] uppercase tracking-[0.3em] text-factory-text-muted">
-        {title}
-      </p>
-      <ul className="mt-3 space-y-1">
-        {items.map((item, i) => (
-          <li key={i} className="text-sm text-factory-text">
-            {item}
-          </li>
-        ))}
-      </ul>
     </div>
   );
 }

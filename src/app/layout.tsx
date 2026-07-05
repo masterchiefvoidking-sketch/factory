@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { FactoryProvider } from "@/context/FactoryContext";
 import { NexusProvider } from "@/context/NexusContext";
+import { OperationsProvider } from "@/context/OperationsContext";
 import { CampusShell } from "@/components/campus/CampusShell";
 import "./globals.css";
 
@@ -34,7 +35,9 @@ export default function RootLayout({
       >
         <FactoryProvider>
           <NexusProvider>
-            <CampusShell>{children}</CampusShell>
+            <OperationsProvider>
+              <CampusShell>{children}</CampusShell>
+            </OperationsProvider>
           </NexusProvider>
         </FactoryProvider>
       </body>

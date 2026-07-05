@@ -6,6 +6,27 @@ import { getEmployeesInBuilding } from "@/domain/registry";
 import { WallDisplay } from "./WallDisplay";
 import { WindowView } from "@/components/atmosphere/WindowView";
 import { TenantSkybridges } from "@/components/nexus/TenantSkybridges";
+import { FactoryBlueprint } from "@/components/operations/FactoryBlueprint";
+
+import type { BuildingId } from "@/domain/types";
+import type { TenantId } from "@/nexus/types";
+
+const BUILDING_TO_TENANT: Partial<Record<BuildingId, TenantId>> = {
+  prime: "prime",
+  toolbelt: "toolbelt",
+  bosslady: "bosslady",
+  citadel: "citadel",
+  forge: "forge",
+  flippy: "flippy",
+  fip: "fip",
+  observatory: "observatory",
+};
+
+function TenantBlueprintMount({ buildingId }: { buildingId: BuildingId }) {
+  const tenantId = BUILDING_TO_TENANT[buildingId];
+  if (!tenantId) return null;
+  return <FactoryBlueprint tenantId={tenantId} />;
+}
 
 const INSTINCT_LABELS: Record<string, string> = {
   exploration: "Exploration",
@@ -182,6 +203,7 @@ export function BuildingInterior() {
           </section>
 
           <TenantSkybridges buildingId={currentBuilding.id} />
+          <TenantBlueprintMount buildingId={currentBuilding.id} />
         </div>
       </div>
     </motion.div>
