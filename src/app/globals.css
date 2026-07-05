@@ -59,6 +59,23 @@ body[data-shift="holiday"] {
   --ambient-brightness: 0.9;
 }
 
+/* Time-of-day lighting (Master Architecture V1.0) */
+body[data-time="morning"] {
+  --time-tint: rgba(255, 200, 120, 0.04);
+}
+
+body[data-time="lunch"] {
+  --time-tint: rgba(255, 255, 240, 0.03);
+}
+
+body[data-time="night"] {
+  --time-tint: rgba(60, 100, 200, 0.06);
+}
+
+body[data-time="maintenance"] {
+  --time-tint: rgba(255, 50, 50, 0.08);
+}
+
 /* Elevator travel effect */
 @keyframes machinery-hum {
   0%, 100% { opacity: 0.03; }

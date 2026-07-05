@@ -1,6 +1,6 @@
 # The Factory
 
-**Project Titan — FACTORY MASTER PROMPT 001**
+**MASTER ARCHITECTURE V1.0 — Codename: TITAN CAMPUS**
 
 > Morgan doesn't launch software. He arrives at Headquarters.
 
@@ -8,55 +8,74 @@
 
 ## What This Is
 
-The Factory is not software. The Factory is a place.
+The Factory is a **physical place**. Every program is merely a tenant. The Factory itself is the product.
 
-This repository contains the **building architecture** for Project Titan — the spatial headquarters where every application is a department, every department has people, and every person has a job.
+This is building architecture — Apple Park meets NASA meets Disney meets MIT meets the Pentagon.
 
-We are not building apps. We are building the building they inhabit.
+## Foundation Stone
+
+> **"Every room has one purpose. Every purpose has one room."**
 
 ## The Campus
 
-| Building | Floor | Role |
-|----------|-------|------|
-| **The Tower** | 90 | Executive operations. Mission Control. Morgan's office. |
-| **The Observatory** | 70 | Walls of screens. Everything entering the Factory begins here. |
-| **Prime** | 55 | Strategic intelligence. Cross-building orchestration. |
-| **The Workshop** | 40 | BossLady. Engineering. Builds. Deployments. |
-| **The Forge** | 25 | Where ideas become companies. Nothing leaves until proven. |
-| **The Data Center** | 20 | FIP. Metrics. Benchmarks. Everything measurable. |
-| **The Archive** | 15 | Citadel. Every document. Every decision. Nothing is lost. |
-| **The Hangar** | 10 | Flippy. Packaging. Releases. Distribution. |
-| **The Theater** | G | Toolbelt. Media. Learning. The calmest building. |
-| **The Courtyard** | G | Arrival. Culture. Celebrations. Company timeline. |
-| **Maintenance Wing** | B5 | Repair. Recovery. The Factory never feels dead. |
-| **The Engine Room** | B10 | Identity. Events. Storage. The machinery beneath everything. |
-
-## Architecture Principles
-
-1. **Build the building, not the apps.** Before Prime existed, there was a building.
-2. **Spatial memory over menus.** "Meet me in the Observatory" — not "click the analytics tab."
-3. **Nothing teleports.** The elevator travels. The camera moves. You hear machinery.
-4. **Every wall teaches something.** Blueprints. Timelines. Principles. Never empty.
-5. **Every room has clearance.** Visitor through Administrator. Different doors open.
-6. **The Factory changes with shifts.** Morning. Night. Weekend. Holiday.
-7. **Scale without restructuring.** Today 12 buildings. Someday 120. Architecture never changes.
-
-## Tech Stack
-
-- **Next.js 15** — App shell
-- **TypeScript** — Domain types (`Building`, `Floor`, `ClearanceLevel`, `Shift`)
-- **Tailwind CSS 4** — Atmosphere and lighting
-- **Framer Motion** — Elevator travel, camera movement, transitions
-
-## Domain Layer
+Nine buildings revolve around **The Tower**. Connected underground. Connected digitally. Connected philosophically.
 
 ```
-src/domain/
-  types.ts      — Building architecture types
-  registry.ts   — Building registry, elevator stops, employees, transit routes
+                     OBSERVATORY
+                           ▲
+            ┌──────────────┼──────────────┐
+            │          THE TOWER          │
+            │   F1 Atrium · F2 Mission    │
+            │   Control · F3 War Room     │
+            └───────┬──────┼──────┬───────┘
+         TOOLBELT   │  COMMONS  │  CITADEL
+                    FORGE  PRIME
+                 BOSSLADY    FIP
+                        FLIPPY
 ```
 
-The registry is the architectural spine. New buildings are added here — never by restructuring routes or layouts.
+Plus **The Garden** (no screens, just sky) and **The Engine Room** (underground).
+
+| Building | Tenant | Badge | Soundscape |
+|----------|--------|-------|------------|
+| **The Tower** | Morgan (Headquarters) | Gold | Calm HVAC |
+| **The Observatory** | World Monitor | Purple | Soft radio chatter |
+| **Toolbelt** | Media Curator | Blue | Library silence |
+| **Citadel** | Chief Archivist | Bronze | Echoing stone |
+| **The Forge** | Research Lead | Red | Industrial ambience |
+| **The Commons** | Everyone | Green | Fountain murmur |
+| **Prime** | Strategic Intelligence | White | Quiet processing |
+| **BossLady** | Chief Engineer | Orange | Mechanical keyboards |
+| **FIP** | Metrics Analyst | Green | Laboratory silence |
+| **Flippy** | Release Captain | Yellow | Packaging machines |
+
+## The Tower (Three Floors)
+
+1. **The Atrium** — Grand Central Terminal. Departure board shows where every employee is right now. Digital globe. Where every day begins.
+2. **Mission Control** — NASA, not dashboards. Factory status. Missions. Blockers. Launch countdowns. You stand.
+3. **War Room** — Whiteboards. Glass. Strategy. No coding. Only thinking.
+
+## Five Human Instincts
+
+Every hallway reinforces one:
+
+- **Exploration** — The Forge
+- **Mastery** — BossLady, FIP, Citadel
+- **Belonging** — The Commons, The Garden, The Atrium
+- **Curiosity** — The Observatory, Toolbelt, War Room
+- **Purpose** — The Tower, Prime, Flippy
+
+## Transportation
+
+No sidebar. Campus map with radial layout. Travel via:
+
+- Elevators (Tower floors, underground)
+- Skybridges
+- Glass tunnels
+- Moving walkways
+- Autonomous carts
+
+Nothing teleports. You travel.
 
 ## Getting Started
 
@@ -65,19 +84,16 @@ npm install
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000). You arrive in the Courtyard.
+You arrive in **The Tower Atrium**. Open the campus map (bottom-right). Travel.
 
-Use the elevator (bottom-right) to travel between buildings.
+## Adding a Building
 
-## Adding a New Building
+1. Add to `BUILDING_IDS` in `src/domain/types.ts`
+2. Define in `BUILDINGS` in `src/domain/registry.ts` with position, material, instinct, soundscape
+3. It appears on the campus map automatically
 
-1. Add the building to `BUILDING_IDS` in `src/domain/types.ts`
-2. Define it in `BUILDINGS` in `src/domain/registry.ts`
-3. Add an elevator stop to `ELEVATOR_STOPS`
-4. The building automatically appears in the campus
-
-No route changes. No layout changes. The architecture scales.
+The architecture never changes shape. It only grows.
 
 ---
 
-*Before BossLady wrote code... there was a building.*
+*Before Prime existed... there was a building.*

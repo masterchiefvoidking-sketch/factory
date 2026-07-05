@@ -1,23 +1,27 @@
 "use client";
 
-import { BuildingInterior } from "@/components/building/BuildingInterior";
+import { LocationView } from "@/components/campus/LocationView";
 import { ShiftLighting } from "@/components/atmosphere/ShiftLighting";
 import { ShiftControls } from "@/components/atmosphere/ShiftControls";
 import { PowerControls } from "@/components/atmosphere/PowerControls";
-import { Elevator } from "@/components/transit/Elevator";
+import { CampusMap } from "@/components/transit/CampusMap";
 import { TravelOverlay } from "@/components/transit/TravelOverlay";
 import { SecurityPanel } from "@/components/security/SecurityPanel";
 import { useFactory } from "@/context/FactoryContext";
+import { FOUNDATION_PRINCIPLE } from "@/domain/types";
 
 export function CampusShell({ children }: { children?: React.ReactNode }) {
-  const { currentBuilding, campus } = useFactory();
+  const { currentBuilding, currentRoomName, campus } = useFactory();
+
+  const locationLabel = currentRoomName
+    ? `${currentBuilding.name} · ${currentRoomName}`
+    : currentBuilding.name;
 
   return (
     <div className="flex h-screen flex-col">
       <ShiftLighting />
       <TravelOverlay />
 
-      {/* Headquarters header */}
       <header className="flex items-center justify-between border-b border-factory-accent-dim/20 bg-factory-bg-surface/80 px-6 py-3 backdrop-blur-sm">
         <div className="flex items-center gap-4">
           <div>
@@ -25,7 +29,7 @@ export function CampusShell({ children }: { children?: React.ReactNode }) {
               The Factory
             </h1>
             <p className="text-[10px] text-factory-text-muted">
-              {campus.location}
+              {campus.codename} · {campus.location}
             </p>
           </div>
           <div className="hidden h-8 w-px bg-factory-accent-dim/20 sm:block" />
@@ -34,7 +38,7 @@ export function CampusShell({ children }: { children?: React.ReactNode }) {
               You are in
             </p>
             <p className="text-sm" style={{ color: currentBuilding.accent }}>
-              {currentBuilding.name}
+              {locationLabel}
             </p>
           </div>
         </div>
@@ -46,21 +50,17 @@ export function CampusShell({ children }: { children?: React.ReactNode }) {
         </div>
       </header>
 
-      {/* Main viewport — the building interior */}
       <main className="relative flex-1 overflow-hidden bg-factory-bg-deep">
-        <BuildingInterior />
+        <LocationView />
         {children}
       </main>
 
-      {/* Transit system — elevator docked bottom-right */}
       <footer className="relative border-t border-factory-accent-dim/20 bg-factory-bg-surface/80 px-6 py-3 backdrop-blur-sm">
         <div className="flex items-center justify-between">
-          <div className="text-[10px] text-factory-text-muted">
-            <span className="uppercase tracking-wider">Transit System</span>
-            <span className="mx-2 text-factory-accent-dim">·</span>
-            <span>Nothing teleports. You travel.</span>
-          </div>
-          <Elevator />
+          <p className="max-w-md truncate text-[10px] italic text-factory-text-muted/60">
+            {FOUNDATION_PRINCIPLE}
+          </p>
+          <CampusMap />
         </div>
       </footer>
     </div>

@@ -1,10 +1,27 @@
 /**
- * FACTORY MASTER PROMPT 001 — Domain Layer
+ * THE FACTORY — MASTER ARCHITECTURE V1.0
+ * Codename: TITAN CAMPUS
  *
- * This is building architecture, not software architecture.
- * Every type here describes a physical place, a person, or a system
- * that exists inside the Factory campus.
+ * Building architecture, not software architecture.
+ * Every room has one purpose. Every purpose has one room.
  */
+
+// ─── Foundation Stone ────────────────────────────────────────────────────────
+
+export const FOUNDATION_PRINCIPLE =
+  "Every room has one purpose. Every purpose has one room.";
+
+// ─── Human Instincts ─────────────────────────────────────────────────────────
+
+export const HUMAN_INSTINCTS = [
+  "exploration",
+  "mastery",
+  "belonging",
+  "curiosity",
+  "purpose",
+] as const;
+
+export type HumanInstinct = (typeof HUMAN_INSTINCTS)[number];
 
 // ─── Clearance ───────────────────────────────────────────────────────────────
 
@@ -37,16 +54,52 @@ export function hasClearance(
   return CLEARANCE_RANK[userLevel] >= CLEARANCE_RANK[requiredLevel];
 }
 
-// ─── Shifts ──────────────────────────────────────────────────────────────────
+// ─── Time & Lighting ─────────────────────────────────────────────────────────
+
+export const TIME_PERIODS = ["morning", "lunch", "night", "maintenance"] as const;
+export type TimePeriod = (typeof TIME_PERIODS)[number];
 
 export const SHIFTS = ["morning", "night", "weekend", "holiday"] as const;
 export type Shift = (typeof SHIFTS)[number];
+
+export interface TimeProfile {
+  id: TimePeriod;
+  label: string;
+  lighting: "warm-sunlight" | "bright" | "blue-night" | "red-emergency";
+  description: string;
+}
+
+export const TIME_PROFILES: Record<TimePeriod, TimeProfile> = {
+  morning: {
+    id: "morning",
+    label: "Morning",
+    lighting: "warm-sunlight",
+    description: "Warm sunlight fills the campus.",
+  },
+  lunch: {
+    id: "lunch",
+    label: "Lunch",
+    lighting: "bright",
+    description: "Bright. The Commons is alive.",
+  },
+  night: {
+    id: "night",
+    label: "Night",
+    lighting: "blue-night",
+    description: "Blue ambient. The Observatory never sleeps.",
+  },
+  maintenance: {
+    id: "maintenance",
+    label: "Maintenance",
+    lighting: "red-emergency",
+    description: "Red emergency lighting. Repair crews active.",
+  },
+};
 
 export interface ShiftProfile {
   id: Shift;
   label: string;
   description: string;
-  lighting: "warm" | "cool" | "dim" | "festive";
   ambientNote: string;
 }
 
@@ -54,81 +107,102 @@ export const SHIFT_PROFILES: Record<Shift, ShiftProfile> = {
   morning: {
     id: "morning",
     label: "Morning Shift",
-    description: "The Factory awakens. Systems boot. Coffee brews.",
-    lighting: "warm",
-    ambientNote: "Distant machinery, morning announcements",
+    description: "The Factory awakens. Every day begins at The Tower.",
+    ambientNote: "Calm HVAC and distant activity",
   },
   night: {
     id: "night",
     label: "Night Shift",
-    description: "Reduced staff. Emergency lighting. Quiet hum.",
-    lighting: "cool",
-    ambientNote: "Low machinery hum, occasional alerts",
+    description: "Reduced staff. The Observatory watches.",
+    ambientNote: "Low hum, soft radio chatter from above",
   },
   weekend: {
     id: "weekend",
     label: "Weekend",
-    description: "Maintenance crews. Prototype benches. Movie nights.",
-    lighting: "dim",
-    ambientNote: "Relaxed atmosphere, Theater may be active",
+    description: "The Garden fills. Toolbelt hosts movie nights.",
+    ambientNote: "Library silence, occasional celebration",
   },
   holiday: {
     id: "holiday",
     label: "Holiday",
-    description: "Celebrations in the Courtyard. Reduced operations.",
-    lighting: "festive",
-    ambientNote: "Celebration sounds from the Courtyard",
+    description: "The Commons celebrates. Reduced operations.",
+    ambientNote: "Celebration from the Courtyard",
   },
 };
 
-// ─── Power State ─────────────────────────────────────────────────────────────
+// ─── Power ───────────────────────────────────────────────────────────────────
 
 export const POWER_STATES = ["online", "backup", "offline"] as const;
 export type PowerState = (typeof POWER_STATES)[number];
 
-// ─── Buildings ───────────────────────────────────────────────────────────────
+// ─── Campus Buildings ────────────────────────────────────────────────────────
 
+/** Nine surface buildings + underground + garden */
 export const BUILDING_IDS = [
-  "engine-room",
-  "maintenance",
-  "courtyard",
-  "theater",
-  "hangar",
-  "archive",
-  "data-center",
-  "forge",
-  "workshop",
-  "prime",
-  "observatory",
   "tower",
+  "observatory",
+  "toolbelt",
+  "citadel",
+  "forge",
+  "commons",
+  "prime",
+  "bosslady",
+  "fip",
+  "flippy",
+  "engine-room",
+  "garden",
 ] as const;
 
 export type BuildingId = (typeof BUILDING_IDS)[number];
+
+/** Surface buildings visible on the campus map */
+export const SURFACE_BUILDINGS: BuildingId[] = [
+  "observatory",
+  "tower",
+  "toolbelt",
+  "citadel",
+  "forge",
+  "commons",
+  "prime",
+  "bosslady",
+  "fip",
+  "flippy",
+];
+
+export type TowerRoomId = "atrium" | "mission-control" | "war-room";
+
+export interface TowerRoom {
+  id: TowerRoomId;
+  floor: number;
+  name: string;
+  purpose: string;
+  instinct: HumanInstinct;
+}
+
+export interface CampusPosition {
+  x: number;
+  y: number;
+}
 
 export interface Building {
   id: BuildingId;
   name: string;
   tagline: string;
-  floor: number;
-  wing: string;
   role: string;
-  /** What this building does — its reason for existing */
   purpose: string;
-  /** What this building never does */
   neverDoes: string;
+  material: string;
+  instinct: HumanInstinct;
+  soundscape: string;
   clearanceRequired: ClearanceLevel;
-  /** Wall content — what the walls teach */
-  wallContent: WallItem[];
-  /** Quotes displayed in this building */
-  quotes: string[];
-  /** Color accent for this building's atmosphere */
   accent: string;
-  /** Icon glyph (unicode) */
   glyph: string;
-  /** Employees (applications) that work here */
-  residents: string[];
-  /** Whether this building is under maintenance */
-  maintenanceMode?: boolean;
+  position: CampusPosition;
+  underground?: boolean;
+  isPlace?: boolean;
+  wallContent: WallItem[];
+  quotes: string[];
+  towerRooms?: TowerRoom[];
 }
 
 export interface WallItem {
@@ -137,24 +211,28 @@ export interface WallItem {
   content: string;
 }
 
-// ─── Floors (Elevator Map) ───────────────────────────────────────────────────
+// ─── Location ────────────────────────────────────────────────────────────────
 
-export interface ElevatorStop {
-  floor: number;
-  label: string;
+export interface Location {
   buildingId: BuildingId;
-  /** Display name on elevator panel */
-  displayName: string;
+  towerRoom?: TowerRoomId;
 }
 
-// ─── Employees (Applications as People) ──────────────────────────────────────
+// ─── Employees (Applications as Tenants) ─────────────────────────────────────
 
 export type EmployeeStatus =
   | "working"
   | "idle"
   | "maintenance"
   | "offline"
-  | "thinking";
+  | "thinking"
+  | "compiling"
+  | "monitoring"
+  | "researching"
+  | "indexing"
+  | "benchmarking"
+  | "packaging"
+  | "receiving";
 
 export interface Employee {
   id: string;
@@ -163,16 +241,23 @@ export interface Employee {
   buildingId: BuildingId;
   desk: string;
   status: EmployeeStatus;
-  currentAssignment: string;
-  dependencies: string[];
-  personality: string;
+  statusLabel: string;
+  badgeColor: string;
   badgeNumber: string;
-  workingHours: string;
+  currentAssignment: string;
+  personality: string;
 }
 
 // ─── Transit ─────────────────────────────────────────────────────────────────
 
-export type TransitMode = "elevator" | "hallway" | "skybridge" | "train";
+export type TransitMode =
+  | "elevator"
+  | "hallway"
+  | "skybridge"
+  | "glass-tunnel"
+  | "moving-walkway"
+  | "autonomous-cart"
+  | "underground-rail";
 
 export interface TransitRoute {
   from: BuildingId;
@@ -182,22 +267,24 @@ export interface TransitRoute {
   description: string;
 }
 
-// ─── Campus ──────────────────────────────────────────────────────────────────
+// ─── Factory State ───────────────────────────────────────────────────────────
 
 export interface Campus {
   name: string;
+  codename: string;
   location: string;
   buildings: BuildingId[];
-  currentShift: Shift;
-  powerState: PowerState;
 }
 
 export interface FactoryState {
   campus: Campus;
-  currentBuildingId: BuildingId;
+  location: Location;
   userClearance: ClearanceLevel;
   isTraveling: boolean;
-  travelingFrom: BuildingId | null;
-  travelingTo: BuildingId | null;
+  travelingFrom: Location | null;
+  travelingTo: Location | null;
+  transitMode: TransitMode | null;
   powerState: PowerState;
+  currentShift: Shift;
+  timePeriod: TimePeriod;
 }

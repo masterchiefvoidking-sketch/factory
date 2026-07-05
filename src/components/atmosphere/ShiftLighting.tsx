@@ -1,18 +1,18 @@
 "use client";
 
 import { useFactory } from "@/context/FactoryContext";
-import { SHIFT_PROFILES } from "@/domain/types";
+import { TIME_PROFILES } from "@/domain/types";
 
-const SHIFT_OVERLAYS: Record<string, string> = {
-  morning: "rgba(255, 200, 100, 0.04)",
-  night: "rgba(60, 100, 200, 0.08)",
-  weekend: "rgba(100, 200, 150, 0.05)",
-  holiday: "rgba(255, 100, 100, 0.06)",
+const TIME_OVERLAYS: Record<string, string> = {
+  morning: "rgba(255, 200, 120, 0.06)",
+  lunch: "rgba(255, 255, 240, 0.04)",
+  night: "rgba(60, 100, 200, 0.1)",
+  maintenance: "rgba(255, 50, 50, 0.12)",
 };
 
 export function ShiftLighting() {
-  const { currentShift, powerState } = useFactory();
-  const profile = SHIFT_PROFILES[currentShift];
+  const { timePeriod, powerState } = useFactory();
+  const profile = TIME_PROFILES[timePeriod];
 
   if (powerState === "offline") {
     return (
@@ -20,7 +20,7 @@ export function ShiftLighting() {
         className="pointer-events-none fixed inset-0 z-40"
         style={{
           background:
-            "radial-gradient(ellipse at center, transparent 30%, rgba(255,50,50,0.15) 100%)",
+            "radial-gradient(ellipse at center, transparent 20%, rgba(255,30,30,0.18) 100%)",
         }}
       />
     );
@@ -32,7 +32,7 @@ export function ShiftLighting() {
         className="pointer-events-none fixed inset-0 z-40"
         style={{
           background:
-            "radial-gradient(ellipse at center, transparent 40%, rgba(255,150,0,0.1) 100%)",
+            "radial-gradient(ellipse at center, transparent 40%, rgba(255,150,0,0.12) 100%)",
         }}
       />
     );
@@ -40,15 +40,17 @@ export function ShiftLighting() {
 
   return (
     <div
-      className="pointer-events-none fixed inset-0 z-40 transition-all duration-[3000ms]"
+      className="pointer-events-none fixed inset-0 z-40 transition-all duration-[4000ms]"
       style={{
-        background: `radial-gradient(ellipse at 50% 0%, ${SHIFT_OVERLAYS[currentShift]} 0%, transparent 70%)`,
+        background: `radial-gradient(ellipse at 50% 0%, ${TIME_OVERLAYS[timePeriod]} 0%, transparent 65%)`,
         boxShadow:
-          profile.lighting === "dim"
-            ? "inset 0 0 200px rgba(0,0,0,0.4)"
-            : profile.lighting === "cool"
-              ? "inset 0 0 150px rgba(0,20,60,0.3)"
-              : "none",
+          profile.lighting === "blue-night"
+            ? "inset 0 0 180px rgba(0,20,80,0.35)"
+            : profile.lighting === "red-emergency"
+              ? "inset 0 0 120px rgba(80,0,0,0.25)"
+              : profile.lighting === "bright"
+                ? "inset 0 0 60px rgba(255,255,200,0.05)"
+                : "none",
       }}
     />
   );

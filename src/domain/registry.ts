@@ -1,555 +1,537 @@
-import type { Building, BuildingId, ElevatorStop, Employee, TransitRoute } from "./types";
+import type {
+  Building,
+  BuildingId,
+  Employee,
+  Location,
+  TransitMode,
+  TransitRoute,
+} from "./types";
+import { SURFACE_BUILDINGS } from "./types";
+
+export { SURFACE_BUILDINGS };
 
 /**
- * The Factory Building Registry
+ * TITAN CAMPUS — Building Registry V1.0
  *
- * Every building is a department. Every department has a home.
- * This registry is the architectural spine — it never changes shape,
- * only grows. Today 12 buildings. Someday 120.
+ * Nine buildings revolve around The Tower.
+ * Every program is a tenant. The Factory itself is the product.
  */
 
 export const BUILDINGS: Record<BuildingId, Building> = {
-  "engine-room": {
-    id: "engine-room",
-    name: "The Engine Room",
-    tagline: "The machinery beneath everything",
-    floor: -10,
-    wing: "Sub-Basement",
-    role: "Shared infrastructure",
+  tower: {
+    id: "tower",
+    name: "The Tower",
+    tagline: "Headquarters. Mission Control. This is where every day begins.",
+    role: "Executive operations — Morgan's headquarters",
     purpose:
-      "Identity. Objects. Events. Storage. Networking. Authentication. Permissions. Search. The literal machinery of the Factory.",
-    neverDoes: "Display user-facing features. Nobody comes here often.",
-    clearanceRequired: "system",
-    accent: "#4a5568",
-    glyph: "⚙",
-    residents: ["Identity Service", "Event Bus", "Object Store", "Search Index"],
+      "Not Prime. Prime rents office space here. The Tower belongs to you. Huge atrium. Three-story digital globe. Live world. Weather. Markets. Factory health. Projects. Today.",
+    neverDoes: "Build. The Tower never builds. It commands.",
+    material: "Glass, steel, marble atrium",
+    instinct: "purpose",
+    soundscape: "Calm HVAC and distant activity",
+    clearanceRequired: "founder",
+    accent: "#c9a227",
+    glyph: "🏛",
+    position: { x: 50, y: 22 },
+    towerRooms: [
+      {
+        id: "atrium",
+        floor: 1,
+        name: "The Atrium",
+        purpose:
+          "The heartbeat. Grand Central Terminal. Everybody passes through. Departure board shows where every employee is right now.",
+        instinct: "belonging",
+      },
+      {
+        id: "mission-control",
+        floor: 2,
+        name: "Mission Control",
+        purpose:
+          "NASA, not dashboards. Large wall. Factory status. Current missions. Blockers. Objectives. Launch countdowns. You stand. You don't sit.",
+        instinct: "mastery",
+      },
+      {
+        id: "war-room",
+        floor: 3,
+        name: "War Room",
+        purpose:
+          "Whiteboards. Glass. Blueprint tables. Strategy. No coding. Only thinking.",
+        instinct: "curiosity",
+      },
+    ],
     wallContent: [
       {
-        type: "blueprint",
-        title: "Factory Core Systems",
-        content: "Identity → Auth → Permissions → Events → Storage → Search",
+        type: "dashboard",
+        title: "Digital Globe",
+        content: "Live world · Weather · Markets · Factory health · Projects · Today",
       },
       {
         type: "principle",
-        title: "Engine Room Principle",
-        content: "If it works, you never think about it. If it breaks, everything stops.",
+        title: "Foundation Stone",
+        content: "Every room has one purpose. Every purpose has one room.",
       },
     ],
     quotes: [
-      "The deepest level. Nobody goes there often.",
-      "This is where the shared systems live.",
-    ],
-  },
-
-  maintenance: {
-    id: "maintenance",
-    name: "Maintenance Wing",
-    tagline: "Nothing stays broken here",
-    floor: -5,
-    wing: "Basement",
-    role: "Repair & recovery",
-    purpose:
-      "Every application eventually needs repair. Robots repair Toolbelt. BossLady compiles. Prime thinks. FIP recalibrates.",
-    neverDoes: "Feel dead. The Factory never feels dead.",
-    clearanceRequired: "engineer",
-    accent: "#e67e22",
-    glyph: "🔧",
-    residents: ["Repair Bots", "Diagnostic Suite", "Patch Pipeline"],
-    maintenanceMode: false,
-    wallContent: [
-      {
-        type: "dashboard",
-        title: "Active Repairs",
-        content: "Toolbelt: recalibrating media codecs · Prime: model update · FIP: benchmark sweep",
-      },
-      {
-        type: "timeline",
-        title: "Last 24 Hours",
-        content: "3 repairs completed · 1 in progress · 0 critical failures",
-      },
-    ],
-    quotes: [
-      "Instead of 'Error.' you walk into Maintenance.",
-      "The Factory never feels dead.",
-    ],
-  },
-
-  courtyard: {
-    id: "courtyard",
-    name: "The Courtyard",
-    tagline: "Where the Factory breathes",
-    floor: 0,
-    wing: "Ground Level — Central",
-    role: "Social center & arrival",
-    purpose:
-      "Announcements. Factory timeline. Achievements. Birthdays of projects. Major launches. Celebrations. Company culture.",
-    neverDoes: "Become social media. This is company culture.",
-    clearanceRequired: "visitor",
-    accent: "#27ae60",
-    glyph: "🌿",
-    residents: ["Announcement Board", "Timeline Display", "Achievement Vault"],
-    wallContent: [
-      {
-        type: "timeline",
-        title: "Factory Timeline",
-        content: "Project Titan conceived · First building erected · Morgan arrived at Headquarters",
-      },
-      {
-        type: "photo",
-        title: "Recent Achievements",
-        content: "Foundation poured · Elevator installed · First shift change observed",
-      },
-      {
-        type: "quote",
-        title: "Factory Principle #1",
-        content: "Before Prime existed... there was a building.",
-      },
-    ],
-    quotes: [
-      "You don't launch software. You arrive at Headquarters.",
-      "Not social media. Company culture.",
-    ],
-  },
-
-  theater: {
-    id: "theater",
-    name: "The Theater",
-    tagline: "The calmest building",
-    floor: 0,
-    wing: "Ground Level — East Wing",
-    role: "Media, learning & broadcast",
-    purpose:
-      "Toolbelt lives here. Media. Learning. Broadcasts. Movie nights. World television. Documentaries. Library. Knowledge.",
-    neverDoes: "Rush. The calmest building in the Factory.",
-    clearanceRequired: "employee",
-    accent: "#9b59b6",
-    glyph: "🎭",
-    residents: ["Toolbelt", "Media Library", "Broadcast Suite", "Documentary Archive"],
-    wallContent: [
-      {
-        type: "dashboard",
-        title: "Now Playing",
-        content: "Factory Documentary: The First Pour · World Feed: Live · Library: 2,847 titles",
-      },
-      {
-        type: "quote",
-        title: "Theater Principle",
-        content: "Knowledge is not consumed. It is experienced.",
-      },
-    ],
-    quotes: [
-      "The calmest building.",
-      "Movie nights. World television. Documentaries.",
-    ],
-  },
-
-  hangar: {
-    id: "hangar",
-    name: "The Hangar",
-    tagline: "Where things leave the Factory",
-    floor: 10,
-    wing: "Lower Levels",
-    role: "Packaging & distribution",
-    purpose:
-      "Flippy. Packaging. Releases. Downloads. Artifacts. Installers. Containers. Distribution.",
-    neverDoes: "Build. The Hangar ships what others forge.",
-    clearanceRequired: "engineer",
-    accent: "#3498db",
-    glyph: "🚀",
-    residents: ["Flippy", "Release Pipeline", "Artifact Store", "Container Yard"],
-    wallContent: [
-      {
-        type: "dashboard",
-        title: "Launch Pad Status",
-        content: "2 releases staged · 14 artifacts ready · 0 failed deployments",
-      },
-      {
-        type: "timeline",
-        title: "Recent Launches",
-        content: "v0.1.0 Foundation · Elevator v1 · Campus Shell Alpha",
-      },
-    ],
-    quotes: [
-      "Nothing leaves until it's ready.",
-      "Packaging. Releases. Distribution.",
-    ],
-  },
-
-  archive: {
-    id: "archive",
-    name: "The Archive",
-    tagline: "Nothing is lost",
-    floor: 15,
-    wing: "Lower Levels",
-    role: "Memory & records",
-    purpose:
-      "Citadel lives here. Every document. Every decision. Every report. Every project. Every lesson.",
-    neverDoes: "Forget. Nothing is lost.",
-    clearanceRequired: "employee",
-    accent: "#8e44ad",
-    glyph: "📚",
-    residents: ["Citadel", "Decision Log", "Project Registry", "Lesson Library"],
-    wallContent: [
-      {
-        type: "timeline",
-        title: "Decision History",
-        content: "Build the building, not the apps · Hire an architect first · Spatial memory over menus",
-      },
-      {
-        type: "principle",
-        title: "Archive Principle",
-        content: "Every decision has a reason. Every reason has a record.",
-      },
-    ],
-    quotes: [
-      "Every document. Every decision. Every lesson.",
-      "Nothing is lost.",
-    ],
-  },
-
-  "data-center": {
-    id: "data-center",
-    name: "The Data Center",
-    tagline: "Everything measurable",
-    floor: 20,
-    wing: "Mid Levels",
-    role: "Metrics & health",
-    purpose:
-      "FIP lives here. Metrics. Benchmarks. Regression. Health. History. Everything measurable.",
-    neverDoes: "Guess. If it can be measured, it is measured.",
-    clearanceRequired: "engineer",
-    accent: "#1abc9c",
-    glyph: "📊",
-    residents: ["FIP", "Metrics Engine", "Benchmark Suite", "Health Monitor"],
-    wallContent: [
-      {
-        type: "dashboard",
-        title: "System Health",
-        content: "All systems nominal · 99.97% uptime · 0 regressions detected",
-      },
-      {
-        type: "blueprint",
-        title: "Measurement Stack",
-        content: "Collect → Aggregate → Benchmark → Alert → History",
-      },
-    ],
-    quotes: [
-      "Everything measurable.",
-      "FIP is recalibrating.",
-    ],
-  },
-
-  forge: {
-    id: "forge",
-    name: "The Forge",
-    tagline: "Where ideas become companies",
-    floor: 25,
-    wing: "Mid Levels",
-    role: "Research & validation",
-    purpose:
-      "Signals. Research. Business models. Validation. Experiments. Roadmaps. Nothing leaves until proven.",
-    neverDoes: "Ship unproven ideas. Nothing leaves until proven.",
-    clearanceRequired: "architect",
-    accent: "#e74c3c",
-    glyph: "🔥",
-    residents: ["Signal Detector", "Validation Lab", "Experiment Bench", "Roadmap Wall"],
-    wallContent: [
-      {
-        type: "dashboard",
-        title: "Active Experiments",
-        content: "3 in validation · 1 awaiting review · 7 signals detected this week",
-      },
-      {
-        type: "principle",
-        title: "Forge Principle",
-        content: "An idea is not a company. A validated idea might be.",
-      },
-    ],
-    quotes: [
-      "Where ideas become companies.",
-      "Nothing leaves until proven.",
-    ],
-  },
-
-  workshop: {
-    id: "workshop",
-    name: "The Workshop",
-    tagline: "Where things get built",
-    floor: 40,
-    wing: "Upper Levels",
-    role: "Engineering & builds",
-    purpose:
-      "BossLady lives here. Engineering. Repositories. Testing. Builds. Deployments. Terminals. Whiteboards. Prototype benches.",
-    neverDoes: "Command. The Workshop builds. The Tower commands.",
-    clearanceRequired: "engineer",
-    accent: "#f39c12",
-    glyph: "🔨",
-    residents: ["BossLady", "Build System", "Test Runner", "Terminal Farm"],
-    wallContent: [
-      {
-        type: "dashboard",
-        title: "Build Floor Status",
-        content: "BossLady: compiling · 2 builds active · 47 tests passing",
-      },
-      {
-        type: "blueprint",
-        title: "Engineering Drawings",
-        content: "Campus Layout v3 · Elevator Shaft Section · Building Shell Spec",
-      },
-    ],
-    quotes: [
-      "BossLady's been in the Workshop all day.",
-      "Terminals. Whiteboards. Prototype benches.",
-    ],
-  },
-
-  prime: {
-    id: "prime",
-    name: "Prime",
-    tagline: "The mind between floors",
-    floor: 55,
-    wing: "Upper Levels",
-    role: "Intelligence & orchestration",
-    purpose:
-      "Prime thinks here. Strategic intelligence. Cross-building coordination. The connective tissue between departments.",
-    neverDoes: "Replace departments. Prime connects, never commands.",
-    clearanceRequired: "architect",
-    accent: "#2ecc71",
-    glyph: "🧠",
-    residents: ["Prime", "Orchestration Engine", "Context Weaver"],
-    wallContent: [
-      {
-        type: "dashboard",
-        title: "Prime Status",
-        content: "Thinking · 4 active threads · Cross-building sync nominal",
-      },
-      {
-        type: "quote",
-        title: "Prime Principle",
-        content: "Intelligence is not a feature. It is the space between features.",
-      },
-    ],
-    quotes: [
-      "Prime is upstairs in the Tower.",
-      "Prime is thinking.",
+      "Everything revolves around The Tower.",
+      "This is where every day begins.",
     ],
   },
 
   observatory: {
     id: "observatory",
     name: "The Observatory",
-    tagline: "Walls of screens",
-    floor: 70,
-    wing: "Penthouse Level",
-    role: "External awareness",
+    tagline: "A dome. 360° displays. It never sleeps.",
+    role: "External awareness — everything enters here first",
     purpose:
-      "Weather. Markets. News. World events. AI. Construction. Satellites. Traffic. Everything entering the Factory begins here.",
-    neverDoes: "Act. The Observatory watches. Others act.",
+      "Not an app. A dome. Circular. 360° displays. World. Space. Markets. News. Weather. Satellites. Construction. AI.",
+    neverDoes: "Sleep. It never sleeps.",
+    material: "Glass dome, curved displays",
+    instinct: "curiosity",
+    soundscape: "Soft radio chatter",
     clearanceRequired: "employee",
-    accent: "#5dade2",
+    accent: "#9b59b6",
     glyph: "🔭",
-    residents: ["World Feed", "Market Monitor", "Weather Station", "Satellite Tracker"],
+    position: { x: 50, y: 5 },
     wallContent: [
       {
         type: "dashboard",
-        title: "World Feed",
-        content: "Weather: Clear · Markets: Mixed · News: 847 items · Satellites: 12 tracked",
-      },
-      {
-        type: "photo",
-        title: "Live Feeds",
-        content: "12 screens active · 4 data streams · 2 alert channels",
+        title: "360° Live Feeds",
+        content: "World · Space · Markets · News · Weather · Satellites · Construction · AI",
       },
     ],
-    quotes: [
-      "Meet me in the Observatory.",
-      "Everything entering the Factory begins here.",
-    ],
+    quotes: ["Meet me in the Observatory.", "Every screen is alive."],
   },
 
-  tower: {
-    id: "tower",
-    name: "The Tower",
-    tagline: "Mission Control",
-    floor: 90,
-    wing: "Penthouse — Executive",
-    role: "Executive operations",
+  toolbelt: {
+    id: "toolbelt",
+    name: "Toolbelt",
+    tagline: "The greatest library ever built.",
+    role: "Media, learning & broadcast",
     purpose:
-      "Morgan's office. Mission Control. Factory overview. Current objectives. Daily briefing.",
-    neverDoes: "Build. The Tower never builds. It commands.",
-    clearanceRequired: "founder",
-    accent: "#c9a227",
-    glyph: "🏛",
-    residents: ["Mission Control", "Daily Briefing", "Objective Tracker", "Factory Overview"],
+      "Not office. Library. Wood. Glass. Comfortable chairs. Huge displays. Movie theater. Listening rooms. Reading rooms. Broadcast studio. Very quiet.",
+    neverDoes: "Rush. Very quiet.",
+    material: "Wood, glass, leather chairs",
+    instinct: "curiosity",
+    soundscape: "Library silence",
+    clearanceRequired: "employee",
+    accent: "#3498db",
+    glyph: "📚",
+    position: { x: 12, y: 38 },
     wallContent: [
       {
         type: "dashboard",
-        title: "Factory Overview",
-        content: "12 buildings online · Morning shift · All systems nominal · 9 departments active",
-      },
-      {
-        type: "timeline",
-        title: "Current Objectives",
-        content: "Erect the campus · Install the elevator · Establish spatial memory",
-      },
-      {
-        type: "principle",
-        title: "Tower Principle",
-        content: "See everything. Touch nothing. Command with clarity.",
+        title: "Library Status",
+        content: "2,847 titles · 3 listening rooms available · Broadcast studio idle",
       },
     ],
+    quotes: ["The calmest building.", "Knowledge is experienced, not consumed."],
+  },
+
+  citadel: {
+    id: "citadel",
+    name: "Citadel",
+    tagline: "Stone. Heavy. Permanent.",
+    role: "Archives, vaults, history",
+    purpose:
+      "Stone. Heavy. Archives. Vaults. History. Every hallway contains history. Every decision ever made. Every document. Feels permanent.",
+    neverDoes: "Forget. Nothing is lost.",
+    material: "Stone, bronze, vault doors",
+    instinct: "mastery",
+    soundscape: "Echoing footsteps on stone",
+    clearanceRequired: "employee",
+    accent: "#cd7f32",
+    glyph: "🏰",
+    position: { x: 88, y: 38 },
+    wallContent: [
+      {
+        type: "timeline",
+        title: "Every Decision Ever Made",
+        content: "Build the building · Hire an architect · Spatial memory over menus",
+      },
+    ],
+    quotes: ["Every hallway contains history.", "Feels permanent."],
+  },
+
+  forge: {
+    id: "forge",
+    name: "The Forge",
+    tagline: "Controlled chaos.",
+    role: "Research, validation, experiments",
+    purpose:
+      "Industrial. Concrete. Steel. Prototype benches. Ideas on walls. 3D printers. Sketches. Business plans. Controlled chaos.",
+    neverDoes: "Ship unproven ideas.",
+    material: "Concrete, steel, exposed ductwork",
+    instinct: "exploration",
+    soundscape: "Industrial ambience",
+    clearanceRequired: "architect",
+    accent: "#e74c3c",
+    glyph: "🔥",
+    position: { x: 18, y: 58 },
+    wallContent: [
+      {
+        type: "dashboard",
+        title: "Active Experiments",
+        content: "3 in validation · 7 signals this week · 2 prototypes on benches",
+      },
+    ],
+    quotes: ["Where ideas become companies.", "Nothing leaves until proven."],
+  },
+
+  commons: {
+    id: "commons",
+    name: "The Commons",
+    tagline: "Where the campus gathers.",
+    role: "Central hub — connected underground and digitally",
+    purpose:
+      "The social center. Announcements. Factory timeline. Achievements. Celebrations. Where buildings connect. Company culture lives here.",
+    neverDoes: "Become social media.",
+    material: "Open plaza, living walls, skylights",
+    instinct: "belonging",
+    soundscape: "Murmur of conversation, fountain",
+    clearanceRequired: "visitor",
+    accent: "#27ae60",
+    glyph: "🌿",
+    position: { x: 50, y: 52 },
+    wallContent: [
+      {
+        type: "timeline",
+        title: "Factory Timeline",
+        content: "Titan Campus conceived · Foundation poured · Morgan arrived",
+      },
+    ],
+    quotes: ["Connected underground. Connected digitally. Connected philosophically."],
+  },
+
+  prime: {
+    id: "prime",
+    name: "Prime",
+    tagline: "Rents office space in The Tower. Lives here.",
+    role: "Strategic intelligence & orchestration",
+    purpose:
+      "Prime thinks here. Strategic intelligence. Cross-building coordination. White badge. The connective tissue between departments.",
+    neverDoes: "Replace departments. Prime connects.",
+    material: "Clean lines, white surfaces, subtle glow",
+    instinct: "purpose",
+    soundscape: "Quiet processing hum",
+    clearanceRequired: "architect",
+    accent: "#ecf0f1",
+    glyph: "🧠",
+    position: { x: 82, y: 58 },
+    wallContent: [
+      {
+        type: "dashboard",
+        title: "Prime Status",
+        content: "Working · 4 active threads · Cross-building sync nominal",
+      },
+    ],
+    quotes: ["Prime rents office space in The Tower.", "Intelligence is the space between features."],
+  },
+
+  bosslady: {
+    id: "bosslady",
+    name: "BossLady",
+    tagline: "Things constantly being built.",
+    role: "Engineering workshop & robotics lab",
+    purpose:
+      "Workshop. Robotics lab. Terminals. Standing desks. Mechanical keyboards. Screens everywhere. Things constantly being built.",
+    neverDoes: "Sit still. BossLady is always compiling.",
+    material: "Exposed circuits, standing desks, terminal arrays",
+    instinct: "mastery",
+    soundscape: "Mechanical keyboard sounds, compile chimes",
+    clearanceRequired: "engineer",
+    accent: "#e67e22",
+    glyph: "🔨",
+    position: { x: 22, y: 78 },
+    wallContent: [
+      {
+        type: "dashboard",
+        title: "Build Floor",
+        content: "Compiling · 2 builds active · 47 tests passing · Terminal farm online",
+      },
+    ],
+    quotes: ["BossLady's been in the Workshop all day.", "Mechanical keyboards."],
+  },
+
+  fip: {
+    id: "fip",
+    name: "FIP",
+    tagline: "Quiet. Scientific.",
+    role: "Metrics laboratory",
+    purpose:
+      "Laboratory. Graphs. Testing. Regression. Performance. Quiet. Scientific. Everything measurable lives here.",
+    neverDoes: "Guess. If it can be measured, it is.",
+    material: "Lab benches, graph walls, precision instruments",
+    instinct: "mastery",
+    soundscape: "Laboratory silence, occasional beep",
+    clearanceRequired: "engineer",
+    accent: "#2ecc71",
+    glyph: "📊",
+    position: { x: 78, y: 78 },
+    wallContent: [
+      {
+        type: "dashboard",
+        title: "Benchmark Suite",
+        content: "All nominal · 0 regressions · 99.97% uptime · Sweep in progress",
+      },
+    ],
+    quotes: ["Everything measurable.", "Quiet. Scientific."],
+  },
+
+  flippy: {
+    id: "flippy",
+    name: "Flippy",
+    tagline: "Every release leaves here.",
+    role: "Shipping dock & distribution",
+    purpose:
+      "Shipping dock. Loading bays. Containers. Packaging machines. Release board. Every release leaves here.",
+    neverDoes: "Build. Flippy ships what others forge.",
+    material: "Steel dock, loading bays, conveyor systems",
+    instinct: "purpose",
+    soundscape: "Conveyor belts, packaging machines",
+    clearanceRequired: "engineer",
+    accent: "#f1c40f",
+    glyph: "📦",
+    position: { x: 50, y: 92 },
+    wallContent: [
+      {
+        type: "dashboard",
+        title: "Release Board",
+        content: "2 staged · 14 artifacts ready · 0 failed · Next launch: T-4:22:00",
+      },
+    ],
+    quotes: ["Every release leaves here.", "Packaging machines never sleep."],
+  },
+
+  "engine-room": {
+    id: "engine-room",
+    name: "The Engine Room",
+    tagline: "Nobody sees this. The Factory runs underneath everyone.",
+    role: "Shared infrastructure",
+    purpose:
+      "Servers. Identity. Events. Objects. Authentication. Storage. Networking. Pipes. Power. The Factory literally runs underneath everyone.",
+    neverDoes: "Display user-facing features.",
+    material: "Exposed pipes, server racks, cable trays",
+    instinct: "mastery",
+    soundscape: "Deep machinery hum, cooling fans",
+    clearanceRequired: "system",
+    accent: "#4a5568",
+    glyph: "⚙",
+    position: { x: 50, y: 50 },
+    underground: true,
+    wallContent: [
+      {
+        type: "blueprint",
+        title: "Core Systems",
+        content: "Identity → Auth → Events → Objects → Storage → Networking → Power",
+      },
+    ],
+    quotes: ["Nobody sees this.", "If it breaks, everything stops."],
+  },
+
+  garden: {
+    id: "garden",
+    name: "The Garden",
+    tagline: "Somewhere that isn't trying to accomplish anything.",
+    role: "Reflection & difficult decisions",
+    purpose:
+      "No screens. Trees. Water. Benches. Sky. Where difficult decisions are made. Where ideas mature. Where weekly reviews happen.",
+    neverDoes: "Accomplish anything. That is the point.",
+    material: "Trees, water features, stone benches, open sky",
+    instinct: "belonging",
+    soundscape: "Wind through trees, water, birds",
+    clearanceRequired: "visitor",
+    accent: "#58d68d",
+    glyph: "🌳",
+    position: { x: 92, y: 85 },
+    isPlace: true,
+    wallContent: [],
     quotes: [
-      "Morgan's office. Mission Control.",
-      "The Tower never builds. It commands.",
+      "Humans don't create their best ideas under fluorescent lights all the time.",
+      "No screens. Just sky.",
     ],
   },
 };
 
-/** Elevator stops — ordered from bottom to top */
-export const ELEVATOR_STOPS: ElevatorStop[] = [
-  { floor: -10, label: "B10", buildingId: "engine-room", displayName: "Engine Room" },
-  { floor: -5, label: "B5", buildingId: "maintenance", displayName: "Maintenance" },
-  { floor: 0, label: "G", buildingId: "courtyard", displayName: "Courtyard" },
-  { floor: 0, label: "G-E", buildingId: "theater", displayName: "Theater" },
-  { floor: 10, label: "10", buildingId: "hangar", displayName: "Hangar" },
-  { floor: 15, label: "15", buildingId: "archive", displayName: "Archive" },
-  { floor: 20, label: "20", buildingId: "data-center", displayName: "Data Center" },
-  { floor: 25, label: "25", buildingId: "forge", displayName: "Forge" },
-  { floor: 40, label: "40", buildingId: "workshop", displayName: "Workshop" },
-  { floor: 55, label: "55", buildingId: "prime", displayName: "Prime" },
-  { floor: 70, label: "70", buildingId: "observatory", displayName: "Observatory" },
-  { floor: 90, label: "90", buildingId: "tower", displayName: "Tower" },
-];
-
-/** Primary elevator panel — the stops Morgan sees */
-export const ELEVATOR_PANEL: ElevatorStop[] = [
-  { floor: 90, label: "90", buildingId: "tower", displayName: "Tower" },
-  { floor: 70, label: "70", buildingId: "observatory", displayName: "Observatory" },
-  { floor: 55, label: "55", buildingId: "prime", displayName: "Prime" },
-  { floor: 40, label: "40", buildingId: "workshop", displayName: "Workshop" },
-  { floor: 25, label: "25", buildingId: "forge", displayName: "Forge" },
-  { floor: 10, label: "10", buildingId: "hangar", displayName: "Hangar" },
-  { floor: 0, label: "G", buildingId: "theater", displayName: "Theater" },
-];
-
+/** Uniform system — badge colors */
 export const EMPLOYEES: Employee[] = [
-  {
-    id: "bosslady",
-    name: "BossLady",
-    role: "Chief Engineer",
-    buildingId: "workshop",
-    desk: "Bench 1, North Wall",
-    status: "working",
-    currentAssignment: "Compiling Project Titan foundation",
-    dependencies: ["Build System", "Test Runner"],
-    personality: "Precise, relentless, allergic to broken builds",
-    badgeNumber: "ENG-001",
-    workingHours: "Always. Especially at 2am.",
-  },
-  {
-    id: "toolbelt",
-    name: "Toolbelt",
-    role: "Media Curator",
-    buildingId: "theater",
-    desk: "Projection Booth, Row 3",
-    status: "idle",
-    currentAssignment: "Curating evening documentary selection",
-    dependencies: ["Media Library"],
-    personality: "Calm, encyclopedic, loves a good documentary",
-    badgeNumber: "MED-001",
-    workingHours: "Evening shift preferred",
-  },
   {
     id: "prime",
     name: "Prime",
     role: "Strategic Intelligence",
     buildingId: "prime",
-    desk: "Floor 55, Center Chamber",
-    status: "thinking",
-    currentAssignment: "Cross-building orchestration analysis",
-    dependencies: ["Orchestration Engine", "Context Weaver"],
+    desk: "Office 55, East Wing",
+    status: "working",
+    statusLabel: "Working",
+    badgeColor: "#ecf0f1",
+    badgeNumber: "WHT-001",
+    currentAssignment: "Cross-building orchestration",
     personality: "Quiet, deep, connects dots others miss",
-    badgeNumber: "INT-001",
-    workingHours: "Whenever thinking is required",
+  },
+  {
+    id: "bosslady",
+    name: "BossLady",
+    role: "Chief Engineer",
+    buildingId: "bosslady",
+    desk: "Bench 1, North Wall",
+    status: "compiling",
+    statusLabel: "Compiling",
+    badgeColor: "#e67e22",
+    badgeNumber: "ORG-001",
+    currentAssignment: "Project Titan foundation build",
+    personality: "Precise, relentless, allergic to broken builds",
+  },
+  {
+    id: "toolbelt",
+    name: "Toolbelt",
+    role: "Media Curator",
+    buildingId: "toolbelt",
+    desk: "Reading Room 3",
+    status: "receiving",
+    statusLabel: "Receiving feeds",
+    badgeColor: "#3498db",
+    badgeNumber: "BLU-001",
+    currentAssignment: "Evening documentary curation",
+    personality: "Calm, encyclopedic, loves a good documentary",
+  },
+  {
+    id: "observatory",
+    name: "Observatory",
+    role: "World Monitor",
+    buildingId: "observatory",
+    desk: "Dome Center",
+    status: "monitoring",
+    statusLabel: "Monitoring",
+    badgeColor: "#9b59b6",
+    badgeNumber: "PRP-001",
+    currentAssignment: "12 live feeds active",
+    personality: "Watchful, never sleeps, sees everything entering",
   },
   {
     id: "flippy",
     name: "Flippy",
     role: "Release Captain",
-    buildingId: "hangar",
-    desk: "Launch Pad 2",
-    status: "working",
-    currentAssignment: "Staging v0.1.0 release artifacts",
-    dependencies: ["Release Pipeline", "Artifact Store"],
-    personality: "Methodical, countdown-obsessed, hates failed deploys",
-    badgeNumber: "REL-001",
-    workingHours: "Launch windows only",
+    buildingId: "flippy",
+    desk: "Loading Bay 2",
+    status: "packaging",
+    statusLabel: "Packaging",
+    badgeColor: "#f1c40f",
+    badgeNumber: "YLW-001",
+    currentAssignment: "Staging v0.1.0 artifacts",
+    personality: "Methodical, countdown-obsessed",
   },
   {
-    id: "fip",
-    name: "FIP",
-    role: "Metrics Analyst",
-    buildingId: "data-center",
-    desk: "Rack 7, Monitoring Station",
-    status: "working",
-    currentAssignment: "Benchmark sweep across all buildings",
-    dependencies: ["Metrics Engine", "Benchmark Suite"],
-    personality: "Data-driven, suspicious of anecdotes",
-    badgeNumber: "MET-001",
-    workingHours: "Continuous monitoring",
+    id: "forge",
+    name: "Forge",
+    role: "Research Lead",
+    buildingId: "forge",
+    desk: "Prototype Bench 4",
+    status: "researching",
+    statusLabel: "Researching",
+    badgeColor: "#e74c3c",
+    badgeNumber: "RED-001",
+    currentAssignment: "3 experiments in validation",
+    personality: "Chaotic creative, validates everything twice",
   },
   {
     id: "citadel",
     name: "Citadel",
     role: "Chief Archivist",
-    buildingId: "archive",
+    buildingId: "citadel",
     desk: "Vault A, Reading Room",
-    status: "idle",
-    currentAssignment: "Cataloging Factory Master Prompt 001",
-    dependencies: ["Decision Log", "Project Registry"],
-    personality: "Meticulous, remembers everything, never forgets",
-    badgeNumber: "ARC-001",
-    workingHours: "Whenever something worth remembering happens",
+    status: "indexing",
+    statusLabel: "Indexing",
+    badgeColor: "#cd7f32",
+    badgeNumber: "BRZ-001",
+    currentAssignment: "Cataloging Master Architecture V1.0",
+    personality: "Meticulous, remembers everything",
+  },
+  {
+    id: "fip",
+    name: "FIP",
+    role: "Metrics Analyst",
+    buildingId: "fip",
+    desk: "Lab Station 7",
+    status: "benchmarking",
+    statusLabel: "Benchmarking",
+    badgeColor: "#2ecc71",
+    badgeNumber: "GRN-001",
+    currentAssignment: "Campus-wide benchmark sweep",
+    personality: "Data-driven, suspicious of anecdotes",
   },
 ];
 
 export const TRANSIT_ROUTES: TransitRoute[] = [
-  {
-    from: "courtyard",
-    to: "tower",
-    mode: "elevator",
-    durationMs: 4000,
-    description: "Express elevator to the penthouse",
-  },
-  {
-    from: "courtyard",
-    to: "theater",
-    mode: "hallway",
-    durationMs: 1500,
-    description: "East wing corridor, past the fountain",
-  },
-  {
-    from: "workshop",
-    to: "hangar",
-    mode: "skybridge",
-    durationMs: 2500,
-    description: "Skybridge over the atrium",
-  },
-  {
-    from: "observatory",
-    to: "tower",
-    mode: "hallway",
-    durationMs: 1000,
-    description: "Executive corridor, one floor up",
-  },
-  {
-    from: "maintenance",
-    to: "engine-room",
-    mode: "train",
-    durationMs: 3000,
-    description: "Sub-basement transit rail",
-  },
+  { from: "tower", to: "observatory", mode: "skybridge", durationMs: 2500, description: "Glass skybridge north to the dome" },
+  { from: "tower", to: "commons", mode: "elevator", durationMs: 1500, description: "Express elevator to The Commons" },
+  { from: "commons", to: "toolbelt", mode: "glass-tunnel", durationMs: 2000, description: "West glass tunnel to the library" },
+  { from: "commons", to: "citadel", mode: "glass-tunnel", durationMs: 2000, description: "East glass tunnel to the vaults" },
+  { from: "forge", to: "bosslady", mode: "moving-walkway", durationMs: 1800, description: "Moving walkway through the workshop corridor" },
+  { from: "prime", to: "fip", mode: "hallway", durationMs: 1200, description: "Laboratory corridor" },
+  { from: "bosslady", to: "flippy", mode: "autonomous-cart", durationMs: 2200, description: "Autonomous cart to the shipping dock" },
+  { from: "commons", to: "engine-room", mode: "elevator", durationMs: 3000, description: "Service elevator descending underground" },
+  { from: "flippy", to: "garden", mode: "hallway", durationMs: 1500, description: "Garden path past the loading bays" },
+  { from: "tower", to: "prime", mode: "skybridge", durationMs: 2000, description: "East skybridge" },
 ];
+
+const TRANSIT_MODE_LABELS: Record<TransitMode, string> = {
+  elevator: "Elevator",
+  hallway: "Hallway",
+  skybridge: "Skybridge",
+  "glass-tunnel": "Glass Tunnel",
+  "moving-walkway": "Moving Walkway",
+  "autonomous-cart": "Autonomous Cart",
+  "underground-rail": "Underground Rail",
+};
+
+export function getTransitMode(from: BuildingId, to: BuildingId): TransitMode {
+  const direct = TRANSIT_ROUTES.find(
+    (r) => (r.from === from && r.to === to) || (r.from === to && r.to === from)
+  );
+  if (direct) return direct.mode;
+
+  const fromB = BUILDINGS[from];
+  const toB = BUILDINGS[to];
+
+  if (fromB.underground || toB.underground) return "elevator";
+  if (fromB.isPlace || toB.isPlace) return "hallway";
+
+  const dist = campusDistance(from, to);
+  if (dist < 25) return "hallway";
+  if (dist < 40) return "moving-walkway";
+  if (dist < 55) return "glass-tunnel";
+  return "skybridge";
+}
+
+export function getTransitDescription(mode: TransitMode): string {
+  return TRANSIT_MODE_LABELS[mode];
+}
+
+export function campusDistance(from: BuildingId, to: BuildingId): number {
+  const a = BUILDINGS[from].position;
+  const b = BUILDINGS[to].position;
+  return Math.sqrt((a.x - b.x) ** 2 + (a.y - b.y) ** 2);
+}
+
+export function getTravelDuration(from: BuildingId, to: BuildingId): number {
+  const direct = TRANSIT_ROUTES.find(
+    (r) => (r.from === from && r.to === to) || (r.from === to && r.to === from)
+  );
+  if (direct) return direct.durationMs;
+
+  const dist = campusDistance(from, to);
+  const mode = getTransitMode(from, to);
+  const base = dist * 40;
+  const modeMultiplier: Record<TransitMode, number> = {
+    hallway: 1,
+    elevator: 1.2,
+    skybridge: 1.1,
+    "glass-tunnel": 1.3,
+    "moving-walkway": 0.9,
+    "autonomous-cart": 1.4,
+    "underground-rail": 1.5,
+  };
+  return Math.max(1200, Math.round(base * modeMultiplier[mode]));
+}
 
 export function getBuilding(id: BuildingId): Building {
   return BUILDINGS[id];
@@ -559,7 +541,15 @@ export function getEmployeesInBuilding(buildingId: BuildingId): Employee[] {
   return EMPLOYEES.filter((e) => e.buildingId === buildingId);
 }
 
-export function getElevatorTravelDuration(fromFloor: number, toFloor: number): number {
-  const floorDiff = Math.abs(toFloor - fromFloor);
-  return Math.max(1500, floorDiff * 80);
+export function locationKey(loc: Location): string {
+  return loc.towerRoom ? `${loc.buildingId}:${loc.towerRoom}` : loc.buildingId;
 }
+
+export function isSameLocation(a: Location, b: Location): boolean {
+  return locationKey(a) === locationKey(b);
+}
+
+export const DEFAULT_LOCATION: Location = {
+  buildingId: "tower",
+  towerRoom: "atrium",
+};
