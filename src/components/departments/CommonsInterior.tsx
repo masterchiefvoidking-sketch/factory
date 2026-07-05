@@ -6,6 +6,7 @@ import { OrgChart } from "./OrgChart";
 import { DepartmentFloorMap } from "./DepartmentFloorMap";
 import { CrossDepartmentProjects } from "./CrossDepartmentProjects";
 import { VisitorWelcome } from "./VisitorWelcome";
+import { GovernanceNotice } from "@/components/governance/GovernanceNotice";
 import { DEPARTMENT_ARCHITECT_RULE } from "@/departments/types";
 
 export function CommonsInterior() {
@@ -29,6 +30,8 @@ export function CommonsInterior() {
 
       <div className="space-y-8 p-8">
         <VisitorWelcome />
+
+        <GovernanceNotice />
 
         <section>
           <h2 className="mb-4 text-[10px] font-medium uppercase tracking-[0.3em] text-factory-accent">

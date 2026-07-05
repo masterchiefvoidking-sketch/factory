@@ -5,6 +5,7 @@ import { useFactory } from "@/context/FactoryContext";
 import { DepartureBoard } from "./DepartureBoard";
 import { CommandCenter } from "@/components/operations/CommandCenter";
 import { Watchboard } from "@/components/operations/Watchboard";
+import { ControlTowerPanel } from "@/components/governance/ControlTowerPanel";
 import { useDepartments } from "@/context/DepartmentsContext";
 import { FOUNDATION_PRINCIPLE } from "@/domain/types";
 
@@ -97,6 +98,10 @@ function MissionControlFloor() {
     <div className="space-y-6">
       <p className="text-sm text-factory-text-muted">
         NASA, not dashboards. You stand. You don&apos;t sit. Morgan understands the entire company in under sixty seconds.
+      </p>
+      <ControlTowerPanel />
+      <p className="text-[10px] italic text-factory-text-muted/60">
+        Below: seeded operations mock data (Project Operations) — not live ecosystem CI.
       </p>
       <CommandCenter />
       <Watchboard />
